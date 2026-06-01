@@ -14,46 +14,10 @@ import {
 import { Button } from "../../ui/button";
 import { Link } from "react-router-dom";
 import { modelPath } from "../../../paths/model-paths";
+import type { ModelInterface } from "../../../interfaces/ModelInterface";
+import { mockModelData } from "../../../MockData/ModelData";
 
-interface ModelInterface {
-  uuid: string;
-  entryName: string;
-  lastUpdated: string;
-  created: string;
-}
-
-const models: ModelInterface[] = [
-  {
-    uuid: "STU001",
-    entryName: "false1",
-    lastUpdated: "8:02 AM",
-    created: "May 28, 2026",
-  },
-  {
-    uuid: "STU002",
-    entryName: "false2",
-    lastUpdated: "8:02 AM",
-    created: "May 28, 2026",
-  },
-  {
-    uuid: "STU003",
-    entryName: "false3",
-    lastUpdated: "8:02 AM",
-    created: "May 28, 2026",
-  },
-  {
-    uuid: "STU004",
-    entryName: "false4",
-    lastUpdated: "8:02 AM",
-    created: "May 28, 2026",
-  },
-  {
-    uuid: "STU005",
-    entryName: "false5",
-    lastUpdated: "8:02 AM",
-    created: "May 28, 2026",
-  },
-];
+const models: ModelInterface[] = mockModelData;
 
 const currentPage = 1;
 const totalPages = 4;
