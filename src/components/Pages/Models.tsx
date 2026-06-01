@@ -10,47 +10,46 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+
 import { Button } from "../ui/button";
 
-interface Entry {
-  studentid: string;
-  is_late: boolean;
-  time: string;
-  date: string;
+interface ModelInterface {
+  uuid: string;
+  entryName: string;
+  lastUpdated: string;
+  created: string;
 }
 
-const entries: Entry[] = [
+const models: ModelInterface[] = [
   {
-    studentid: "STU001",
-    is_late: false,
-    time: "8:02 AM",
-    date: "May 28, 2026",
-  },
-  { studentid: "STU002", is_late: true, time: "9:15 AM", date: "May 28, 2026" },
-  {
-    studentid: "STU003",
-    is_late: false,
-    time: "7:58 AM",
-    date: "May 27, 2026",
+    uuid: "STU005",
+    entryName: "false1",
+    lastUpdated: "8:02 AM",
+    created: "May 28, 2026",
   },
   {
-    studentid: "STU004",
-    is_late: true,
-    time: "10:03 AM",
-    date: "May 27, 2026",
+    uuid: "STU005",
+    entryName: "false2",
+    lastUpdated: "8:02 AM",
+    created: "May 28, 2026",
   },
   {
-    studentid: "STU005",
-    is_late: false,
-    time: "8:30 AM",
-    date: "May 26, 2026",
+    uuid: "STU005",
+    entryName: "false3",
+    lastUpdated: "8:02 AM",
+    created: "May 28, 2026",
+  },
+  {
+    uuid: "STU005",
+    entryName: "false4",
+    lastUpdated: "8:02 AM",
+    created: "May 28, 2026",
+  },
+  {
+    uuid: "STU005",
+    entryName: "false5",
+    lastUpdated: "8:02 AM",
+    created: "May 28, 2026",
   },
 ];
 
@@ -59,50 +58,23 @@ const totalPages = 4;
 
 function Models() {
   return (
-    <div className="p-4 space-y-4">
-      {/* Search */}
-      <Input placeholder="EX: STU001" className="max-w-sm" />
+    <div className="space-y-4">
+      <Input placeholder="Search by entrry name" className="max-w-sm" />
 
-      {/* Table */}
       <Table>
-        <TableCaption>A list of student entries</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[120px]">Student ID</TableHead>
-            <TableHead>Is Late</TableHead>
-            <TableHead>Time</TableHead>
-            <TableHead className="text-right">Date</TableHead>
+            <TableHead className="text-white">Entry Name</TableHead>
+            <TableHead className="text-white">created</TableHead>
+            <TableHead className="text-white">Last Updated</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {entries.map((entry) => (
-            <TableRow key={entry.studentid}>
-              <TableCell>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="cursor-pointer"
-                    >
-                      {entry.studentid}
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuGroup>
-                      <DropdownMenuItem className="cursor-pointer">
-                        Student Info
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="cursor-pointer">
-                        Entries
-                      </DropdownMenuItem>
-                    </DropdownMenuGroup>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </TableCell>
-              <TableCell>yes</TableCell>
-              <TableCell>{entry.time}</TableCell>
-              <TableCell className="text-right">{entry.date}</TableCell>
+          {models.map((model) => (
+            <TableRow key={model.uuid}>
+              <TableCell>{model.entryName}</TableCell>
+              <TableCell>{model.created}</TableCell>
+              <TableCell>{model.lastUpdated}</TableCell>
             </TableRow>
           ))}
         </TableBody>
