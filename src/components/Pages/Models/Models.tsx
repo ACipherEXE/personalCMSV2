@@ -1,5 +1,5 @@
 import { ArrowLeftIcon, ArrowRightIcon, Badge } from "lucide-react";
-import { Input } from "../ui/input";
+import { Input } from "../../ui/input";
 import {
   Table,
   TableBody,
@@ -9,9 +9,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../ui/table";
+} from "../../ui/table";
 
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
+import { Link } from "react-router-dom";
+import { modelPath } from "../../../paths/model-paths";
 
 interface ModelInterface {
   uuid: string;
@@ -22,25 +24,25 @@ interface ModelInterface {
 
 const models: ModelInterface[] = [
   {
-    uuid: "STU005",
+    uuid: "STU001",
     entryName: "false1",
     lastUpdated: "8:02 AM",
     created: "May 28, 2026",
   },
   {
-    uuid: "STU005",
+    uuid: "STU002",
     entryName: "false2",
     lastUpdated: "8:02 AM",
     created: "May 28, 2026",
   },
   {
-    uuid: "STU005",
+    uuid: "STU003",
     entryName: "false3",
     lastUpdated: "8:02 AM",
     created: "May 28, 2026",
   },
   {
-    uuid: "STU005",
+    uuid: "STU004",
     entryName: "false4",
     lastUpdated: "8:02 AM",
     created: "May 28, 2026",
@@ -64,7 +66,7 @@ function Models() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-white">Entry Name</TableHead>
+            <TableHead className="text-white">Model Name</TableHead>
             <TableHead className="text-white">created</TableHead>
             <TableHead className="text-white">Last Updated</TableHead>
           </TableRow>
@@ -72,7 +74,14 @@ function Models() {
         <TableBody>
           {models.map((model) => (
             <TableRow key={model.uuid}>
-              <TableCell>{model.entryName}</TableCell>
+              <TableCell>
+                <Link
+                  to={`${modelPath.modelEntry + model.uuid}`}
+                  className="text-blue-500 font-bold hover:text-blue-700 text-lg"
+                >
+                  {model.entryName}
+                </Link>
+              </TableCell>
               <TableCell>{model.created}</TableCell>
               <TableCell>{model.lastUpdated}</TableCell>
             </TableRow>

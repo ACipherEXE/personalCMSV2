@@ -4,6 +4,8 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from "../ui/navigation-menu";
+import { contentPath } from "../../paths/content-path";
+import { modelPath } from "../../paths/model-paths";
 
 function NavBar({ children }: { children: React.ReactNode }) {
   return (
@@ -15,10 +17,10 @@ function NavBar({ children }: { children: React.ReactNode }) {
               <Link to="/">Home</Link>
             </NavigationMenuItem>
             <NavigationMenuItem className="mr-4">
-              <Link to="/Models">Models</Link>
+              <Link to={modelPath.model}>Models</Link>
             </NavigationMenuItem>
             <NavigationMenuItem className="mr-4">
-              <Link to="/Content">Content</Link>
+              <Link to={contentPath.content}>Content</Link>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
