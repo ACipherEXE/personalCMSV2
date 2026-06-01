@@ -1,9 +1,8 @@
-import { ArrowLeftIcon, ArrowRightIcon, Badge } from "lucide-react";
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import { Input } from "../../ui/input";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
@@ -12,47 +11,6 @@ import {
 } from "../../ui/table";
 
 import { Button } from "../../ui/button";
-import { Link } from "react-router-dom";
-
-interface ModelInterface {
-  uuid: string;
-  entryName: string;
-  lastUpdated: string;
-  created: string;
-}
-
-const models: ModelInterface[] = [
-  {
-    uuid: "STU001",
-    entryName: "false1",
-    lastUpdated: "8:02 AM",
-    created: "May 28, 2026",
-  },
-  {
-    uuid: "STU002",
-    entryName: "false2",
-    lastUpdated: "8:02 AM",
-    created: "May 28, 2026",
-  },
-  {
-    uuid: "STU003",
-    entryName: "false3",
-    lastUpdated: "8:02 AM",
-    created: "May 28, 2026",
-  },
-  {
-    uuid: "STU004",
-    entryName: "false4",
-    lastUpdated: "8:02 AM",
-    created: "May 28, 2026",
-  },
-  {
-    uuid: "STU005",
-    entryName: "false5",
-    lastUpdated: "8:02 AM",
-    created: "May 28, 2026",
-  },
-];
 
 const currentPage = 1;
 const totalPages = 4;
@@ -70,22 +28,7 @@ function Model() {
             <TableHead className="text-white">Last Updated</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
-          {models.map((model) => (
-            <TableRow key={model.uuid}>
-              <TableCell>
-                <Link
-                  to={`/models/model/${model.uuid}`}
-                  className="text-blue-500 font-bold hover:text-blue-700 text-lg"
-                >
-                  {model.entryName}
-                </Link>
-              </TableCell>
-              <TableCell>{model.created}</TableCell>
-              <TableCell>{model.lastUpdated}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+        <TableBody></TableBody>
         <TableFooter>
           <TableRow>
             <TableCell colSpan={3}>Page</TableCell>

@@ -14,7 +14,7 @@ import { Button } from "../../ui/button";
 import { Link } from "react-router-dom";
 import { modelPath } from "../../../paths/model-paths";
 import type { ModelInterface } from "../../../interfaces/ModelInterface";
-import { mockModelData } from "../../../MockData/ModelData";
+import { mockModelData } from "../../../mockData/ModelData";
 
 const models: ModelInterface[] = mockModelData;
 
