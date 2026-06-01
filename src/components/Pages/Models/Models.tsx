@@ -1,9 +1,8 @@
-import { ArrowLeftIcon, ArrowRightIcon, Badge } from "lucide-react";
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import { Input } from "../../ui/input";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
