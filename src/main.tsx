@@ -8,6 +8,7 @@ import Content from "./components/Pages/Content.tsx";
 import Models from "./components/Pages/Models/Models.tsx";
 import { modelPath } from "./paths/model-paths.ts";
 import { contentPath } from "./paths/content-path.ts";
+import Model from "./components/Pages/Models/Model.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -19,7 +20,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path={modelPath.model} element={<Models />} />
             <Route
               path={`${modelPath.modelEntry}:modelId`}
-              element={<Models />}
+              element={<Model />}
             />
             <Route path={contentPath.content} element={<Content />} />
             <Route
