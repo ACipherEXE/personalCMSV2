@@ -17,6 +17,8 @@ export type ContentfulFieldValidation =
   | LinkContentTypeValidation
   | RichTextValidation;
 
+  
+
 /**
  * Common properties for validation messages.
  */
