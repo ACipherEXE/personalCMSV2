@@ -14,9 +14,14 @@ export interface field {
   type: string;
   localized: boolean;
   required: boolean;
-  validations?: ContentfulFieldValidation;
+  validations?: ContentfulFieldValidation[];
   disabled: boolean;
   omitted: boolean;
+  items?: {
+    type: string;
+    validations?: ContentfulFieldValidation[];
+    linkType?: string;
+  };
 }
 
 

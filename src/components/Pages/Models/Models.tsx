@@ -13,10 +13,10 @@ import {
 import { Button } from "../../ui/button";
 import { Link } from "react-router-dom";
 import { modelPath } from "../../../paths/model-paths";
-import type { ModelInterface } from "../../../interfaces/ModelInterface";
-import { mockModelData } from "../../../mockData/ModelData";
+import type { modelInterface } from "../../../interfaces/ModelInterface";
+import { mockModelData } from "../../../MockData/ModelData";
 
-const models: ModelInterface[] = mockModelData;
+const models: modelInterface[] = mockModelData;
 
 const currentPage = 1;
 const totalPages = 4;
