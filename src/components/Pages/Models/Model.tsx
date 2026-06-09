@@ -10,12 +10,9 @@ import {
   TableRow,
 } from "../../ui/table";
 
-import { Button } from "../../ui/button";
-
-const currentPage = 1;
-const totalPages = 4;
 
 function Model() {
+  
   return (
     <div className="space-y-4">
       <Table>

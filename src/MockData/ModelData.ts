@@ -4,13 +4,13 @@ export const mockModelData: modelInterface[] = [
   {
     uuid: "tokenContainer",
     entryName: "Token Container",
-    lastUpdated: "8:02 AM",
+    lastUpdated: "May 28, 2026",
     created: "May 28, 2026",
   },
   {
     uuid: "localizationToken",
     entryName: "Localization Token",
-    lastUpdated: "8:02 AM",
+    lastUpdated: "May 28, 2026",
     created: "May 28, 2026",
   }
 ];
@@ -23,7 +23,7 @@ export const mockModelContent_TokenContainer: modelInterface = {
   fields: [
     {
       id: "title",
-      name: "text",
+      name: "title",
       type: "shortText",
       localized: false,
       required: false,
@@ -62,25 +62,7 @@ export const mockModelContent_TokenContainer: modelInterface = {
         ],
         linkType: "Entry",
       },
-    },
-    {
-      id: "buttonText",
-      name: "Button",
-      type: "string",
-      localized: false,
-      required: false,
-      disabled: false,
-      omitted: false,
-    },
-    {
-      id: "buttonText",
-      name: "Button",
-      type: "string",
-      localized: false,
-      required: false,
-      disabled: false,
-      omitted: false,
-    },
+    }
   ],
 };
 
