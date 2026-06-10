@@ -9,10 +9,15 @@ import {
 } from "../../ui/table";
 
 function Model() {
-  
+  const sidebarItems = ["Model", "JSON structure"];
+
+  const handleSidebarClick = (item: string) => {
+    console.log(item);
+  };
+
   return (
     <div className="flex h-full">
-      <SideBar/>
+      <SideBar sidebarItems={sidebarItems} onItemClick={handleSidebarClick} />
       <main className="flex-1 p-4">
         <Table>
           <TableHeader>
