@@ -23,7 +23,7 @@ export const mockModelContent_TokenContainer: modelInterface = {
   fields: [
     {
       id: "title",
-      name: "title",
+      name: "Title",
       type: "shortText",
       localized: false,
       required: false,
@@ -32,7 +32,7 @@ export const mockModelContent_TokenContainer: modelInterface = {
     },
     {
       id: "slug",
-      name: "slug",
+      name: "Slug",
       type: "Symbol",
       localized: false,
       required: true,
