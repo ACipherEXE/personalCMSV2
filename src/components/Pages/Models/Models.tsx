@@ -15,13 +15,32 @@ import { Link } from "react-router-dom";
 import { modelPath } from "../../../paths/model-paths";
 import type { modelInterface } from "../../../interfaces/ModelInterface";
 import { mockModelData } from "../../../MockData/ModelData";
+import { getContentModels } from "../../../API/superBaseAPICalls";
+import { useEffect, useState } from "react";
 
-const models: modelInterface[] = mockModelData;
+// const models: modelInterface[] = mockModelData;
+
+console.log("Models.tsx: models:", await getContentModels());
 
 const currentPage = 1;
 const totalPages = 4;
 
 function Models() {
+  // const models: modelInterface[] = await getContentModels();
+  const [models, setModels] = useState<modelInterface[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const fetchModels = async () => {
+      setIsLoading(true);
+      const models = (await getContentModels()) || [];
+      console.log("Models.tsx: fetchModels: models:", models);
+      setModels(models);
+      setIsLoading(false);
+    };
+
+    fetchModels();
+  }, []);
+
   return (
     <div className="space-y-4">
       <Input placeholder="Search by entrry name" className="max-w-sm" />
@@ -30,25 +49,33 @@ function Models() {
         <TableHeader>
           <TableRow>
             <TableHead className="text-white">Model Name</TableHead>
-            <TableHead className="text-white">created</TableHead>
+            <TableHead className="text-white">Created</TableHead>
             <TableHead className="text-white">Last Updated</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {models.map((model) => (
-            <TableRow key={model.uuid}>
-              <TableCell>
-                <Link
-                  to={`${modelPath.modelEntry + model.uuid}`}
-                  className="text-blue-500 font-bold hover:text-blue-700 text-lg"
-                >
-                  {model.entryName}
-                </Link>
+          {isLoading ? (
+            <TableRow>
+              <TableCell colSpan={3} className="text-center">
+                Loading...
               </TableCell>
-              <TableCell>{model.created}</TableCell>
-              <TableCell>{model.lastUpdated}</TableCell>
             </TableRow>
-          ))}
+          ) : (
+            models.map((model) => (
+              <TableRow key={model.uuid}>
+                <TableCell>
+                  <Link
+                    to={`${modelPath.modelEntry + model.uuid}`}
+                    className="text-blue-500 font-bold hover:text-blue-700 text-lg"
+                  >
+                    {model.entry_name}
+                  </Link>
+                </TableCell>
+                <TableCell>{model.created_at}</TableCell>
+                <TableCell>{model.last_updated}</TableCell>
+              </TableRow>
+            ))
+          )}
         </TableBody>
         <TableFooter>
           <TableRow>

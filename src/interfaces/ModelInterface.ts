@@ -2,9 +2,9 @@ import type { ContentfulFieldValidation } from "./Validations";
 
 export interface modelInterface {
   uuid: string;
-  entryName: string;
-  lastUpdated: string;
-  created: string;
+  entry_name: string;
+  last_updated: string;
+  created_at: string;
   fields?: field[];
 }
 
@@ -23,5 +23,3 @@ export interface field {
     linkType?: string;
   };
 }
-
-
