@@ -40,7 +40,7 @@ function Model() {
           ← Back
         </Button>
         <h1 className="text-white text-xl font-semibold">
-          {modelStructure?.entryName ?? "Loading..."}
+          {modelStructure?.entry_name ?? "Loading..."}
         </h1>
       </div>
 

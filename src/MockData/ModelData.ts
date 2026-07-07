@@ -1,25 +1,26 @@
 import type { modelInterface } from "../interfaces/ModelInterface";
 
+// Outdated mock data for testing purposes. This should be replaced with actual API calls in production.
 export const mockModelData: modelInterface[] = [
   {
     uuid: "tokenContainer",
-    entryName: "Token Container",
-    lastUpdated: "May 28, 2026",
-    created: "May 28, 2026",
+    entry_name: "Token Container",
+    last_updated: "May 28, 2026",
+    created_at: "May 28, 2026",
   },
   {
     uuid: "localizationToken",
-    entryName: "Localization Token",
-    lastUpdated: "May 28, 2026",
-    created: "May 28, 2026",
-  }
+    entry_name: "Localization Token",
+    last_updated: "May 28, 2026",
+    created_at: "May 28, 2026",
+  },
 ];
 
 export const mockModelContent_TokenContainer: modelInterface = {
   uuid: "tokenContainer",
-  entryName: "Token Container",
-  lastUpdated: "May 28, 2026",
-  created: "May 28, 2026",
+  entry_name: "Token Container",
+  last_updated: "May 28, 2026",
+  created_at: "May 28, 2026",
   fields: [
     {
       id: "title",
@@ -62,39 +63,39 @@ export const mockModelContent_TokenContainer: modelInterface = {
         ],
         linkType: "Entry",
       },
-    }
+    },
   ],
 };
 
 export const mockModelContent_localizationToken: modelInterface = {
   uuid: "localizationToken",
-  entryName: "Localization Token",
-  lastUpdated: "May 28, 2026",
-  created: "May 28, 2026",
+  entry_name: "Localization Token",
+  last_updated: "May 28, 2026",
+  created_at: "May 28, 2026",
   fields: [
     {
-      "id": "key",
-      "name": "Key",
-      "type": "Symbol",
-      "localized": false,
-      "required": true,
-      "validations": [
+      id: "key",
+      name: "Key",
+      type: "Symbol",
+      localized: false,
+      required: true,
+      validations: [
         {
-          "unique": true
-        }
+          unique: true,
+        },
       ],
-      "disabled": false,
-      "omitted": false
+      disabled: false,
+      omitted: false,
     },
     {
-      "id": "value",
-      "name": "Value",
-      "type": "Text",
-      "localized": true,
-      "required": true,
-      "validations": [],
-      "disabled": false,
-      "omitted": false
-    }
+      id: "value",
+      name: "Value",
+      type: "Text",
+      localized: true,
+      required: true,
+      validations: [],
+      disabled: false,
+      omitted: false,
+    },
   ],
 };

@@ -14,13 +14,10 @@ import { Button } from "../../ui/button";
 import { Link } from "react-router-dom";
 import { modelPath } from "../../../paths/model-paths";
 import type { modelInterface } from "../../../interfaces/ModelInterface";
-import { mockModelData } from "../../../MockData/ModelData";
+// import { mockModelData } from "../../../MockData/ModelData";
 import { getContentModels } from "../../../API/superBaseAPICalls";
 import { useEffect, useState } from "react";
-
-// const models: modelInterface[] = mockModelData;
-
-console.log("Models.tsx: models:", await getContentModels());
+import { formatDate } from "../../../Functions/DateFixes";
 
 const currentPage = 1;
 const totalPages = 4;
@@ -71,8 +68,8 @@ function Models() {
                     {model.entry_name}
                   </Link>
                 </TableCell>
-                <TableCell>{model.created_at}</TableCell>
-                <TableCell>{model.last_updated}</TableCell>
+                <TableCell>{formatDate(model.created_at)}</TableCell>
+                <TableCell>{formatDate(model.last_updated)}</TableCell>
               </TableRow>
             ))
           )}
