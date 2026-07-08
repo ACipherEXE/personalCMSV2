@@ -28,7 +28,6 @@ function Models() {
     const fetchModels = async () => {
       setIsLoading(true);
       const models = (await getContentModels()) || [];
-      console.log("Models.tsx: fetchModels: models:", models);
       setModels(models);
       setIsLoading(false);
     };
