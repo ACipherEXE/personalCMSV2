@@ -2,13 +2,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import SideBar from "../../custom/SideBar";
 import { Button } from "../../ui/button";
 import { modelPath } from "../../../paths/model-paths";
-import {
-  mockModelContent_TokenContainer,
-  mockModelContent_localizationToken,
-} from "../../../MockData/ModelData";
 import { useEffect, useState } from "react";
 import type { modelInterface } from "../../../interfaces/ModelInterface";
 import TableDisplay from "../../custom/TableDisplay";
+import { getSpecificContentModel } from "../../../API/superBaseAPICalls";
 
 function Model() {
   const sidebarItems = ["Model", "JSON structure"];
@@ -18,15 +15,22 @@ function Model() {
   const handleSidebarClick = (item: string) => {
     console.log(item);
   };
+  const [isLoading, setIsLoading] = useState(true);
+
   const { modelId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (modelId === mockModelContent_TokenContainer.uuid) {
-      setModelStructure(mockModelContent_TokenContainer);
-    } else if (modelId === mockModelContent_localizationToken.uuid) {
-      setModelStructure(mockModelContent_localizationToken);
-    }
+    const fetchSpecificModels = async () => {
+      if (!modelId) return;
+      setIsLoading(true);
+      const model = (await getSpecificContentModel(modelId)) || null;
+      console.log("Models.tsx: fetchSpecificModels: models:", model);
+      setModelStructure(model || null);
+      setIsLoading(false);
+    };
+
+    fetchSpecificModels();
   }, [modelId]);
 
   return (
