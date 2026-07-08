@@ -14,7 +14,6 @@ import { Button } from "../../ui/button";
 import { Link } from "react-router-dom";
 import { modelPath } from "../../../paths/model-paths";
 import type { modelInterface } from "../../../interfaces/ModelInterface";
-// import { mockModelData } from "../../../MockData/ModelData";
 import { getContentModels } from "../../../API/superBaseAPICalls";
 import { useEffect, useState } from "react";
 import { formatDate } from "../../../Functions/DateFixes";
@@ -23,7 +22,6 @@ const currentPage = 1;
 const totalPages = 4;
 
 function Models() {
-  // const models: modelInterface[] = await getContentModels();
   const [models, setModels] = useState<modelInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -40,8 +38,10 @@ function Models() {
 
   return (
     <div className="space-y-4">
-      <Input placeholder="Search by entrry name" className="max-w-sm" />
-
+      <div className="flex justify-between items-center w-full">
+        <Input placeholder="Search by entry name" className="max-w-sm" />
+        <Button>Create Model</Button>
+      </div>
       <Table>
         <TableHeader>
           <TableRow>

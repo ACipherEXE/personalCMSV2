@@ -78,7 +78,9 @@ function Model() {
                   />
                 )}
               {selectedSidebarItem === sidebarItems[1] &&
-                modelStructure?.fields && <JSONDisplay />}
+                modelStructure?.fields && (
+                  <JSONDisplay rawJSON={modelStructure} />
+                )}
             </>
           )}
         </main>
