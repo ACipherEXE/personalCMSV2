@@ -6,14 +6,22 @@ import { useEffect, useState } from "react";
 import type { modelInterface } from "../../../interfaces/ModelInterface";
 import TableDisplay from "../../custom/TableDisplay";
 import { getSpecificContentModel } from "../../../API/superBaseAPICalls";
+import JSONDisplay from "../../custom/JSONDisplay";
 
+/**
+ * This is used to edit, read and add functions to models. Think of this area as a blueprint editor.
+ * @returns The model page
+ */
 function Model() {
   const sidebarItems = ["Model", "JSON structure"];
   const [modelStructure, setModelStructure] = useState<modelInterface | null>(
     null,
   );
+  const [selectedSidebarItem, setSelectedSidebarItem] = useState<string | null>(
+    sidebarItems[0],
+  );
   const handleSidebarClick = (item: string) => {
-    console.log(item);
+    setSelectedSidebarItem(item);
   };
   const [isLoading, setIsLoading] = useState(true);
 
@@ -25,7 +33,6 @@ function Model() {
       if (!modelId) return;
       setIsLoading(true);
       const model = (await getSpecificContentModel(modelId)) || null;
-      console.log("Models.tsx: fetchSpecificModels: models:", model);
       setModelStructure(model || null);
       setIsLoading(false);
     };
@@ -49,14 +56,30 @@ function Model() {
       </div>
 
       <div className="flex flex-1">
-        <SideBar sidebarItems={sidebarItems} onItemClick={handleSidebarClick} />
+        {!isLoading && (
+          <SideBar
+            sidebarItems={sidebarItems}
+            onItemClick={handleSidebarClick}
+          />
+        )}
         <main className="flex-1 p-4">
-          {modelStructure?.fields && (
-            <TableDisplay
-              headers={["Content", "Type"]}
-              rows={modelStructure.fields}
-              rowKeys={["name", "type"]}
-            />
+          {isLoading ? (
+            <div className="text-white text-center">Loading...</div>
+          ) : !modelStructure ? (
+            <div className="text-white text-center">Model not found</div>
+          ) : (
+            <>
+              {selectedSidebarItem === sidebarItems[0] &&
+                modelStructure?.fields && (
+                  <TableDisplay
+                    headers={["Content", "Type"]}
+                    rows={modelStructure.fields}
+                    rowKeys={["name", "type"]}
+                  />
+                )}
+              {selectedSidebarItem === sidebarItems[1] &&
+                modelStructure?.fields && <JSONDisplay />}
+            </>
           )}
         </main>
       </div>
