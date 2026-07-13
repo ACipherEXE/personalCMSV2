@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { CreateDialogProps } from "../../interfaces/ModelInterface";
 import { Button } from "../ui/button";
 import {
@@ -18,6 +19,7 @@ function CreateDialog({
   placeholder = "Placeholder",
   onSubmit,
 }: CreateDialogProps) {
+  const [userInput, setUserInput] = useState("");
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -31,11 +33,19 @@ function CreateDialog({
         </DialogHeader>
 
         <div className="space-y-4">
-          <Input placeholder={placeholder} />
+          <Input
+            placeholder={placeholder}
+            onChange={(e) => setUserInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                onSubmit(userInput);
+              }
+            }}
+          />
         </div>
 
         <DialogFooter>
-          <Button type="submit" onClick={onSubmit}>
+          <Button type="submit" onClick={() => onSubmit(userInput)}>
             {buttonText}
           </Button>
         </DialogFooter>

@@ -37,5 +37,5 @@ export interface CreateDialogProps {
   description: string;
   buttonText: string;
   placeholder: string;
-  onSubmit: () => void;
+  onSubmit: (value: string) => void;
 }

@@ -45,7 +45,8 @@ function Models() {
           description={"Type the name of your new content model."}
           buttonText={"Create"}
           placeholder={"Entry name"}
-          onSubmit={function (): void {
+          onSubmit={function (entryName: string): void {
+            console.log("Create model with entry name:", entryName);
             throw new Error("Function not implemented.");
           }}
         />
