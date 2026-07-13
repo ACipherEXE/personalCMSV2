@@ -23,3 +23,11 @@ export interface field {
     linkType?: string;
   };
 }
+
+export interface CreateDialogProps {
+  header: string;
+  description: string;
+  buttonText: string;
+  placeholder: string;
+  onSubmit: () => void;
+}

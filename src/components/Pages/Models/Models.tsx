@@ -17,6 +17,7 @@ import type { modelInterface } from "../../../interfaces/ModelInterface";
 import { getContentModels } from "../../../API/superBaseAPICalls";
 import { useEffect, useState } from "react";
 import { formatDate } from "../../../Functions/DateFixes";
+import CreateDialog from "../../custom/CreateDialog";
 
 const currentPage = 1;
 const totalPages = 4;
@@ -39,7 +40,15 @@ function Models() {
     <div className="space-y-4">
       <div className="flex justify-between items-center w-full">
         <Input placeholder="Search by entry name" className="max-w-sm" />
-        <Button>Create Model</Button>
+        <CreateDialog
+          header={"Create Model"}
+          description={"Type the name of your new content model."}
+          buttonText={"Create"}
+          placeholder={"Entry name"}
+          onSubmit={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
       </div>
       <Table>
         <TableHeader>
