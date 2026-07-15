@@ -5,15 +5,7 @@ export interface modelInterface {
   entry_name: string;
   last_updated: string;
   created_at: string;
-  fields?: field[];
-}
-
-export interface modelInterfaceCreate {
-  uuid: string;
-  entry_name: string;
-  last_updated: string;
-  created_at: string;
-  fields?: field[] | null;
+  fields: field[];
 }
 
 export interface field {

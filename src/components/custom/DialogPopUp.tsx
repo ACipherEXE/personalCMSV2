@@ -12,7 +12,7 @@ import {
 } from "../ui/dialog";
 import { Input } from "../ui/input";
 
-function CreateDialog({
+function DialogPopUp({
   header = "header",
   description = "description",
   buttonText = "Button",
@@ -54,4 +54,4 @@ function CreateDialog({
   );
 }
 
-export default CreateDialog;
+export default DialogPopUp;
