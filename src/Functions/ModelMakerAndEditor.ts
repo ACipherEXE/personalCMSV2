@@ -8,10 +8,7 @@ export const createModel = async (modelName: string) => {
     .toLowerCase()
     .replace(/[-_ ]+(.)/g, (_, char) => char.toUpperCase());
   // First check if the model already exists in the database. If it does, throw an error.
-  const exists = await modelExists(
-    //camelcase the model name and replace spaces with dashes to create a valid uuid
-    uuid,
-  );
+  const exists = await modelExists(uuid);
   if (exists) {
     throw new Error(`Model with name ${modelName} already exists.`);
   }
