@@ -11,14 +11,14 @@ interface TableDisplayProps {
   headers: string[];
   rows: Record<string, any>[];
   rowKeys: string[];
-  AddNewField?: () => void;
+  addNewField?: () => void;
 }
 
 function TableDisplay({
   headers,
   rows,
   rowKeys,
-  AddNewField,
+  addNewField,
 }: TableDisplayProps) {
   return (
     <Table>
@@ -40,13 +40,15 @@ function TableDisplay({
           </TableRow>
         ))}
         <TableRow>
-          <TableCell
-            colSpan={headers.length}
-            className="text-center text-blue-500 font-bold hover:text-blue-700 cursor-pointer"
-            onClick={AddNewField}
-          >
-            + Add new field
-          </TableCell>
+          {addNewField && (
+            <TableCell
+              colSpan={headers.length}
+              className="text-center text-blue-500 font-bold hover:text-blue-700 cursor-pointer"
+              onClick={addNewField}
+            >
+              + Add new field
+            </TableCell>
+          )}
         </TableRow>
       </TableBody>
     </Table>

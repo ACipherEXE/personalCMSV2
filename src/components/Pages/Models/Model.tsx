@@ -75,7 +75,7 @@ function Model() {
                     headers={["Name", "Type"]}
                     rows={modelStructure.fields}
                     rowKeys={["name", "type"]}
-                    AddNewField={() => {
+                    addNewField={() => {
                       // Handle adding a new field here
                       console.log("Add new field clicked");
                     }}
