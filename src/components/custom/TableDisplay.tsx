@@ -6,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import FieldPopUp from "./FieldPopUp";
 
 interface TableDisplayProps {
   headers: string[];
@@ -46,7 +47,15 @@ function TableDisplay({
               className="text-center text-blue-500 font-bold hover:text-blue-700 cursor-pointer"
               onClick={addNewField}
             >
-              + Add new field
+              <FieldPopUp
+                header={"Create Field"}
+                description={"Type the name of your new field."}
+                buttonText={"Add New Field"}
+                placeholder={"Field name"}
+                onSubmit={function (value: string): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
             </TableCell>
           )}
         </TableRow>

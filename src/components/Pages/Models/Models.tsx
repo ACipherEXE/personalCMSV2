@@ -28,6 +28,7 @@ function Models() {
 
   const [models, setModels] = useState<modelInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const fetchModels = async () => {
       setIsLoading(true);
