@@ -50,5 +50,5 @@ export const createContentModel = async (model: modelInterface) => {
   }
 
   const result = await response.json();
-  return result;
+  return result[0];
 };

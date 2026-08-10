@@ -11,9 +11,15 @@ interface TableDisplayProps {
   headers: string[];
   rows: Record<string, any>[];
   rowKeys: string[];
+  AddNewField?: () => void;
 }
 
-function TableDisplay({ headers, rows, rowKeys }: TableDisplayProps) {
+function TableDisplay({
+  headers,
+  rows,
+  rowKeys,
+  AddNewField,
+}: TableDisplayProps) {
   return (
     <Table>
       <TableHeader>
@@ -33,6 +39,15 @@ function TableDisplay({ headers, rows, rowKeys }: TableDisplayProps) {
             ))}
           </TableRow>
         ))}
+        <TableRow>
+          <TableCell
+            colSpan={headers.length}
+            className="text-center text-blue-500 font-bold hover:text-blue-700 cursor-pointer"
+            onClick={AddNewField}
+          >
+            + Add new field
+          </TableCell>
+        </TableRow>
       </TableBody>
     </Table>
   );

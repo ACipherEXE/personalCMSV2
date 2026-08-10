@@ -72,9 +72,13 @@ function Model() {
               {selectedSidebarItem === sidebarItems[0] &&
                 modelStructure?.fields && (
                   <TableDisplay
-                    headers={["Content", "Type"]}
+                    headers={["Name", "Type"]}
                     rows={modelStructure.fields}
                     rowKeys={["name", "type"]}
+                    AddNewField={() => {
+                      // Handle adding a new field here
+                      console.log("Add new field clicked");
+                    }}
                   />
                 )}
               {selectedSidebarItem === sidebarItems[1] &&

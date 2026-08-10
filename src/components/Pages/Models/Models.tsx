@@ -11,7 +11,7 @@ import {
 } from "../../ui/table";
 
 import { Button } from "../../ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { modelPath } from "../../../paths/model-paths";
 import type { modelInterface } from "../../../interfaces/ModelInterface";
 import { getContentModels } from "../../../API/superBaseAPICalls";
@@ -24,6 +24,8 @@ const currentPage = 1;
 const totalPages = 4;
 
 function Models() {
+  const navigate = useNavigate();
+
   const [models, setModels] = useState<modelInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -50,6 +52,7 @@ function Models() {
             console.log("Create model with entry name:", entryName);
             const newModel = await createModel(entryName);
             console.log("New model created:", newModel);
+            navigate(`${modelPath.modelEntry}${newModel?.uuid}`);
             throw new Error("Function not implemented.");
           }}
         />
