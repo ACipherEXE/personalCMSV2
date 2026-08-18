@@ -1,3 +1,4 @@
+import type { field } from "../../interfaces/ModelInterface";
 import {
   Table,
   TableBody,
@@ -10,7 +11,7 @@ import FieldPopUp from "./FieldPopUp";
 
 interface TableDisplayProps {
   headers: string[];
-  rows: Record<string, any>[];
+  rows: field[];
   rowKeys: string[];
   addNewField?: (fieldData: {
     userInput: string;
@@ -57,6 +58,7 @@ function TableDisplay({
                 onSubmit={({ userInput, selectedType }) => {
                   addNewField({ userInput, selectedType });
                 }}
+                rows={rows}
               />
             </TableCell>
           )}

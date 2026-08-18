@@ -30,4 +30,5 @@ export interface CreateDialogProps {
   buttonText: string;
   placeholder: string;
   onSubmit: (value: { userInput: string; selectedType: string | null }) => void;
+  rows: field[];
 }
