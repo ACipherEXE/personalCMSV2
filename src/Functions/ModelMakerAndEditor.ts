@@ -1,16 +1,18 @@
-import { createContentModel, modelExists } from "../API/superBaseAPICalls";
+import {
+  createContentModel,
+  modelExists,
+  updateContentModel,
+} from "../API/superBaseAPICalls";
 import type { modelInterface } from "../interfaces/ModelInterface";
 import { mockModelDataSkelington } from "../mockData/ModelSkelingtion";
-
+import { camelCaseGenerator } from "./StringFixes";
 /**
  * CREATE
  */
 // Creates a model and adds it to the database. Returns the created model.
 export const createModel = async (modelName: string) => {
   // make it a uuid by camelcasing the model name
-  const uuid = modelName
-    .toLowerCase()
-    .replace(/[-_ ]+(.)/g, (_, char) => char.toUpperCase());
+  const uuid = camelCaseGenerator(modelName);
   // First check if the model already exists in the database. If it does, throw an error.
   const exists = await modelExists(uuid);
   if (exists) {
@@ -32,33 +34,6 @@ export const saveModel = (dateString: string) => {
 };
 
 /**
- * EDIT
- */
-// export const editModel = async (
-//   modelName: string,
-//   updatedData: modelInterface,
-// ) => {
-//   // make it a uuid by camelcasing the model name
-//   const uuid = modelName
-//     .toLowerCase()
-//     .replace(/[-_ ]+(.)/g, (_, char) => char.toUpperCase());
-//   // First check if the model already exists in the database. If it does, throw an error.
-//   const exists = await modelExists(uuid);
-//   if (exists) {
-//     throw new Error(`Model with name ${modelName} already exists.`);
-//   }
-//   // If it doesn't, create the model and add it to the database.
-//   const newModel = {
-//     ...updatedData,
-//     entry_name: updatedData.entry_name,
-//     uuid: updatedData.uuid,
-//     created_at: updatedData.created_at,
-//     last_updated: new Date().toISOString(),
-//   };
-//   return await createContentModel(newModel);
-// };
-
-/**
  * UPDATE
  */
 export const updateModel = async (updatedData: modelInterface) => {
@@ -71,8 +46,9 @@ export const updateModel = async (updatedData: modelInterface) => {
       ...updatedData,
       entry_name: updatedData.entry_name,
       uuid: updatedData.uuid,
+      last_updated: new Date().toISOString(),
     };
-    return await createContentModel(updatedModel);
+    return await updateContentModel(updatedModel);
   }
   // If it doesn't, throw an error.
   throw new Error(`Model with uuid ${updatedData.uuid} does not exist.`);

@@ -54,18 +54,25 @@ export const createContentModel = async (model: modelInterface) => {
   return result[0];
 };
 
-export const editContentModel = async (model: modelInterface) => {
-  const response = await fetch(`${SUPABASE_URL}/rest/v1/content_model`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Prefer: "return=representation",
+export const updateContentModel = async (model: modelInterface) => {
+  const response = await fetch(
+    `${SUPABASE_URL}/rest/v1/content_model?uuid=eq.${model.uuid}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Prefer: "return=representation",
+      },
+      body: JSON.stringify({
+        fields: model.fields,
+        entry_name: model.entry_name,
+        last_updated: model.last_updated,
+      }),
     },
-    body: JSON.stringify(model),
-  });
+  );
 
   if (!response.ok) {
-    throw new Error(`Failed to create model: ${response.statusText}`);
+    throw new Error(`Failed to edit model: ${response.statusText}`);
   }
 
   const result = await response.json();

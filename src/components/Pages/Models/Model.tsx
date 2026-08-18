@@ -7,6 +7,8 @@ import type { modelInterface } from "../../../interfaces/ModelInterface";
 import TableDisplay from "../../custom/TableDisplay";
 import { getSpecificContentModel } from "../../../API/superBaseAPICalls";
 import JSONDisplay from "../../custom/JSONDisplay";
+import { camelCaseGenerator } from "../../../Functions/StringFixes";
+import { updateModel } from "../../../Functions/ModelMakerAndEditor";
 
 /**
  * This is used to edit, read and add functions to models. Think of this area as a blueprint editor.
@@ -80,6 +82,21 @@ function Model() {
                       console.log("Add new field clicked");
                       console.log("New field name1:", userInput);
                       console.log("Selected type:", selectedType);
+                      modelStructure.fields.push({
+                        name: userInput,
+                        type: selectedType || "string",
+                        id: camelCaseGenerator(userInput),
+                        localized: false,
+                        required: false,
+                        disabled: false,
+                        omitted: false,
+                      });
+                      setModelStructure({ ...modelStructure });
+                      console.log(
+                        "Current model structure:",
+                        modelStructure.fields,
+                      );
+                      updateModel(modelStructure);
                     }}
                   />
                 )}

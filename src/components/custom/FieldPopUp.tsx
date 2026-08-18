@@ -28,9 +28,18 @@ function FieldPopUp({
   const [userInput, setUserInput] = useState("");
   const typeOptions = ["String", "Number", "Boolean"];
   const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [open, setOpen] = useState(false); // 👈 control it yourself
+
+  const handleSubmit = () => {
+    if (!userInput.trim() || !selectedType) return;
+    onSubmit({ userInput, selectedType });
+    setOpen(false);
+  };
   return (
     <Dialog
+      open={open}
       onOpenChange={(open) => {
+        setOpen(open);
         if (!open) {
           setUserInput("");
           setSelectedType(null);
@@ -57,7 +66,7 @@ function FieldPopUp({
             onChange={(e) => setUserInput(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                onSubmit({ userInput, selectedType });
+                handleSubmit();
               }
             }}
             className="bg-black text-white border-white/20 placeholder:text-white/40 focus-visible:ring-white/40"
@@ -88,7 +97,7 @@ function FieldPopUp({
         <DialogFooter>
           <Button
             type="submit"
-            onClick={() => onSubmit({ userInput, selectedType })}
+            onClick={handleSubmit}
             className="bg-white text-black hover:bg-white/80"
           >
             {buttonText}

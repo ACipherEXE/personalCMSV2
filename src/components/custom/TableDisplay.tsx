@@ -55,8 +55,6 @@ function TableDisplay({
                 buttonText={"Add New Field"}
                 placeholder={"Field name"}
                 onSubmit={({ userInput, selectedType }) => {
-                  // console.log("New field name:", userInput);
-                  // console.log("Selected type:", selectedType);
                   addNewField({ userInput, selectedType });
                 }}
               />
