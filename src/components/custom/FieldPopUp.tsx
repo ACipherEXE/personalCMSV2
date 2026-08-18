@@ -57,7 +57,7 @@ function FieldPopUp({
             onChange={(e) => setUserInput(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                onSubmit(userInput);
+                onSubmit({ userInput, selectedType });
               }
             }}
             className="bg-black text-white border-white/20 placeholder:text-white/40 focus-visible:ring-white/40"
@@ -88,7 +88,7 @@ function FieldPopUp({
         <DialogFooter>
           <Button
             type="submit"
-            onClick={() => onSubmit(userInput)}
+            onClick={() => onSubmit({ userInput, selectedType })}
             className="bg-white text-black hover:bg-white/80"
           >
             {buttonText}

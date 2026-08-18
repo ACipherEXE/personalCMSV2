@@ -12,7 +12,10 @@ interface TableDisplayProps {
   headers: string[];
   rows: Record<string, any>[];
   rowKeys: string[];
-  addNewField?: () => void;
+  addNewField?: (fieldData: {
+    userInput: string;
+    selectedType: string | null;
+  }) => void;
 }
 
 function TableDisplay({
@@ -45,15 +48,16 @@ function TableDisplay({
             <TableCell
               colSpan={headers.length}
               className="text-center text-blue-500 font-bold hover:text-blue-700 cursor-pointer"
-              onClick={addNewField}
             >
               <FieldPopUp
                 header={"Create Field"}
                 description={"Type the name of your new field."}
                 buttonText={"Add New Field"}
                 placeholder={"Field name"}
-                onSubmit={function (value: string): void {
-                  throw new Error("Function not implemented.");
+                onSubmit={({ userInput, selectedType }) => {
+                  // console.log("New field name:", userInput);
+                  // console.log("Selected type:", selectedType);
+                  addNewField({ userInput, selectedType });
                 }}
               />
             </TableCell>
