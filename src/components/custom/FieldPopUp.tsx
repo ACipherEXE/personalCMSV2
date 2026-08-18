@@ -31,9 +31,11 @@ function FieldPopUp({
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState<boolean>(false);
-  console.log("rows in FieldPopUp:", rows);
+
   const handleSubmit = () => {
+    // Validate user input and selected type
     if (!userInput.trim() || !selectedType) return;
+    // Check if the userInput already exists in the rows array
     if (rows.some((row) => row.name === userInput)) {
       setError(true);
       return;
