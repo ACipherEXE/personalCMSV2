@@ -79,9 +79,6 @@ function Model() {
                     rowKeys={["name", "type"]}
                     addNewField={({ userInput, selectedType }) => {
                       // Handle adding a new field here
-                      console.log("Add new field clicked");
-                      console.log("New field name1:", userInput);
-                      console.log("Selected type:", selectedType);
                       modelStructure.fields.push({
                         name: userInput,
                         type: selectedType || "string",
@@ -92,10 +89,6 @@ function Model() {
                         omitted: false,
                       });
                       setModelStructure({ ...modelStructure });
-                      console.log(
-                        "Current model structure:",
-                        modelStructure.fields,
-                      );
                       updateModel(modelStructure);
                     }}
                   />
