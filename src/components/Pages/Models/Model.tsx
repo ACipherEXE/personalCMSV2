@@ -88,6 +88,7 @@ function Model() {
                         disabled: false,
                         omitted: false,
                       });
+                      // Update the state and save the model structure
                       setModelStructure({ ...modelStructure });
                       updateModel(modelStructure);
                     }}
