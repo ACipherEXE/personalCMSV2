@@ -14,7 +14,10 @@ import { Button } from "../../ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { modelPath } from "../../../paths/model-paths";
 import type { modelInterface } from "../../../interfaces/ModelInterface";
-import { getContentModels } from "../../../API/superBaseAPICalls";
+import {
+  getContentEntries,
+  getContentModels,
+} from "../../../API/superBaseAPICalls";
 import { useEffect, useState } from "react";
 import { formatDate } from "../../../Functions/DateFixes";
 const currentPage = 1;
@@ -29,6 +32,8 @@ function Contents() {
     const fetchModels = async () => {
       setIsLoading(true);
       const models = (await getContentModels()) || [];
+      const entries = (await getContentEntries()) || [];
+      console.log("Fetched entries:", entries);
       setModels(models);
       setIsLoading(false);
     };
