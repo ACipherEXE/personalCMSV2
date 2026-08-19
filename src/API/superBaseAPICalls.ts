@@ -12,6 +12,16 @@ export const getContentModels = async (): Promise<modelInterface[]> => {
     });
 };
 
+export const getContentEntries = async (): Promise<modelInterface[]> => {
+  return fetch(`${SUPABASE_URL}/rest/v1/content_entry`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      return result;
+    });
+};
+
 export const getSpecificContentModel = async (
   modelUuid: string,
 ): Promise<modelInterface | null> => {
@@ -24,9 +34,33 @@ export const getSpecificContentModel = async (
     });
 };
 
+export const getSpecificContentEntry = async (
+  entryUuid: string,
+): Promise<modelInterface | null> => {
+  return fetch(`${SUPABASE_URL}/rest/v1/content_entry?uuid=eq.${entryUuid}`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      return result[0];
+    });
+};
+
 export const modelExists = async (uuid: string): Promise<boolean> => {
   const response = await fetch(
     `${SUPABASE_URL}/rest/v1/content_model?uuid=eq.${uuid}&select=uuid`,
+    {
+      method: "GET",
+    },
+  );
+
+  const result = await response.json();
+  return result.length > 0;
+};
+
+export const entryExists = async (uuid: string): Promise<boolean> => {
+  const response = await fetch(
+    `${SUPABASE_URL}/rest/v1/content_entry?uuid=eq.${uuid}&select=uuid`,
     {
       method: "GET",
     },
