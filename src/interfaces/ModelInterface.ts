@@ -7,6 +7,13 @@ export interface modelInterface {
   created_at: string;
   fields: field[];
 }
+export interface entriesInterface {
+  uuid: string;
+  entry_name: string;
+  last_updated: string;
+  created_at: string;
+  fields: field[];
+}
 
 export interface field {
   id: string;

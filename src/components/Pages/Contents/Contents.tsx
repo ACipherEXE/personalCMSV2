@@ -13,7 +13,10 @@ import DialogPopUp from "../../custom/DialogPopUp";
 import { Button } from "../../ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { modelPath } from "../../../paths/model-paths";
-import type { modelInterface } from "../../../interfaces/ModelInterface";
+import type {
+  entriesInterface,
+  modelInterface,
+} from "../../../interfaces/ModelInterface";
 import {
   getContentEntries,
   getContentModels,
@@ -26,6 +29,7 @@ function Contents() {
   const navigate = useNavigate();
 
   const [models, setModels] = useState<modelInterface[]>([]);
+  const [entries, setEntries] = useState<entriesInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -35,6 +39,7 @@ function Contents() {
       const entries = (await getContentEntries()) || [];
       console.log("Fetched entries:", entries);
       setModels(models);
+      setEntries(entries);
       setIsLoading(false);
     };
 
