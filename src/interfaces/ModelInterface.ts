@@ -8,11 +8,15 @@ export interface modelInterface {
   fields: field[];
 }
 export interface entriesInterface {
-  uuid: string;
-  entry_name: string;
-  last_updated: string;
+  id: string;
+  model_uuid: string;
+  model_name: string;
+  name: string;
   created_at: string;
-  fields: field[];
+  updated_at: string;
+  fields: {
+    [fieldName: string]: LocalizedField;
+  };
 }
 
 export interface field {
@@ -29,6 +33,12 @@ export interface field {
     validations?: ContentfulFieldValidation[];
     linkType?: string;
   };
+}
+
+type LocalizedValue = string | number | boolean;
+
+interface LocalizedField {
+  [locale: string]: LocalizedValue | undefined;
 }
 
 export interface CreateDialogProps {
