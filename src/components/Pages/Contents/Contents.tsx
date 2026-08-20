@@ -12,7 +12,6 @@ import {
 import DialogPopUp from "../../custom/DialogPopUp";
 import { Button } from "../../ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import { modelPath } from "../../../paths/model-paths";
 import type {
   entriesInterface,
   modelInterface,
@@ -23,6 +22,8 @@ import {
 } from "../../../API/superBaseAPICalls";
 import { useEffect, useState } from "react";
 import { formatDate } from "../../../Functions/DateFixes";
+import { contentPath } from "../../../paths/content-path";
+
 const currentPage = 1;
 const totalPages = 4;
 function Contents() {
@@ -81,19 +82,19 @@ function Contents() {
               </TableCell>
             </TableRow>
           ) : (
-            models.map((model) => (
-              <TableRow key={model.uuid}>
+            entries.map((model) => (
+              <TableRow key={model.id}>
                 <TableCell>
                   <Link
-                    to={`${modelPath.modelEntry + model.uuid}`}
+                    to={`${contentPath.contentEntry + model.id}`}
                     className="text-blue-500 font-bold hover:text-blue-700 text-lg"
                   >
                     Test
                   </Link>
                 </TableCell>
-                <TableCell>{model.entry_name}</TableCell>
+                <TableCell>{model.name}</TableCell>
                 <TableCell>{formatDate(model.created_at)}</TableCell>
-                <TableCell>{formatDate(model.last_updated)}</TableCell>
+                <TableCell>{formatDate(model.updated_at)}</TableCell>
               </TableRow>
             ))
           )}

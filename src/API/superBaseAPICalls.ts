@@ -1,4 +1,7 @@
-import type { modelInterface } from "../interfaces/ModelInterface";
+import type {
+  entriesInterface,
+  modelInterface,
+} from "../interfaces/ModelInterface";
 
 const SUPABASE_URL = "http://localhost:54321";
 /**
@@ -19,7 +22,7 @@ export const getContentModels = async (): Promise<modelInterface[]> => {
  * A API call that gets all the content entries from the database.
  * @returns An array of content entries.
  */
-export const getContentEntries = async (): Promise<modelInterface[]> => {
+export const getContentEntries = async (): Promise<entriesInterface[]> => {
   return fetch(`${SUPABASE_URL}/rest/v1/content_entry`, {
     method: "GET",
   })
