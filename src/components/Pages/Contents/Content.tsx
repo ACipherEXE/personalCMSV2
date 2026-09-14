@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { getSpecificContentModel } from "../../../API/superBaseAPICalls";
+import {
+  getSpecificContentEntry,
+  getSpecificContentModel,
+} from "../../../API/superBaseAPICalls";
 import type { modelInterface } from "../../../interfaces/ModelInterface";
 import SideBar from "../../custom/SideBar";
 import { Button } from "../../ui/button";
@@ -10,6 +13,7 @@ import ContentDisplay from "../../custom/ContentDisplay";
 
 function Content() {
   const modelId = "localizationToken";
+  const entryId = "13beba48-4da1-4f0a-85da-2416c8fbb94b";
   const [modelStructure, setModelStructure] = useState<modelInterface | null>(
     null,
   );
@@ -26,7 +30,9 @@ function Content() {
     const fetchSpecificModels = async () => {
       if (!modelId) return;
       const model = (await getSpecificContentModel(modelId)) || null;
+      const entrie = (await getSpecificContentEntry(entryId)) || [];
       console.log("model", model);
+      console.log("entrie", entrie);
       setModelStructure(model || null);
       setIsLoading(false);
     };

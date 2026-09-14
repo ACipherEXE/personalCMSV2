@@ -57,7 +57,7 @@ export const getSpecificContentModel = async (
 export const getSpecificContentEntry = async (
   entryUuid: string,
 ): Promise<modelInterface | null> => {
-  return fetch(`${SUPABASE_URL}/rest/v1/content_entry?uuid=eq.${entryUuid}`, {
+  return fetch(`${SUPABASE_URL}/rest/v1/content_entry?id=eq.${entryUuid}`, {
     method: "GET",
   })
     .then((response) => response.json())
