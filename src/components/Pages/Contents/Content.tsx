@@ -67,6 +67,7 @@ function Content() {
                   <ContentDisplay
                     headers={["Name"]}
                     rows={modelStructure.fields}
+                    rowsContent={modelStructure.fields}
                     rowKeys={["name"]}
                   />
                 )}
