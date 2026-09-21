@@ -83,19 +83,19 @@ function Contents() {
               </TableCell>
             </TableRow>
           ) : (
-            entries.map((model) => (
-              <TableRow key={model.id}>
+            entries.map((entrie) => (
+              <TableRow key={entrie.id}>
                 <TableCell>
                   <Link
-                    to={`${contentPath.contentEntry + model.id}`}
+                    to={`${contentPath.contentEntry + entrie.id}`}
                     className="text-blue-500 font-bold hover:text-blue-700 text-lg"
                   >
-                    Test
+                    {entrie.name}
                   </Link>
                 </TableCell>
-                <TableCell>{model.name}</TableCell>
-                <TableCell>{formatDate(model.created_at)}</TableCell>
-                <TableCell>{formatDate(model.updated_at)}</TableCell>
+                <TableCell>{entrie.model_name}</TableCell>
+                <TableCell>{formatDate(entrie.created_at)}</TableCell>
+                <TableCell>{formatDate(entrie.updated_at)}</TableCell>
               </TableRow>
             ))
           )}
