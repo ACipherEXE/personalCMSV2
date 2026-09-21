@@ -56,7 +56,7 @@ export const getSpecificContentModel = async (
  */
 export const getSpecificContentEntry = async (
   entryUuid: string,
-): Promise<modelInterface | null> => {
+): Promise<entriesInterface | null> => {
   return fetch(`${SUPABASE_URL}/rest/v1/content_entry?id=eq.${entryUuid}`, {
     method: "GET",
   })
