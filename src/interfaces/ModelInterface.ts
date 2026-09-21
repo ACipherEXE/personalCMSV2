@@ -37,7 +37,7 @@ export interface field {
 
 type LocalizedValue = string | number | boolean;
 
-interface LocalizedField {
+export interface LocalizedField {
   [locale: string]: LocalizedValue | undefined;
 }
 

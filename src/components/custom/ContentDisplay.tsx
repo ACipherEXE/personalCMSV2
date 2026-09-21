@@ -1,4 +1,4 @@
-import type { field } from "../../interfaces/ModelInterface";
+import type { field, LocalizedField } from "../../interfaces/ModelInterface";
 import { Input } from "../ui/input";
 import {
   Table,
@@ -13,7 +13,9 @@ import FieldPopUp from "./FieldPopUp";
 interface TableDisplayProps {
   headers: string[];
   rows: field[];
-  rowsContent: field[];
+  rowsContent: {
+    [fieldName: string]: LocalizedField;
+  };
   rowKeys: string[];
   addNewField?: (fieldData: {
     userInput: string;
@@ -25,8 +27,10 @@ function ContentDisplay({
   headers,
   rows,
   rowKeys,
+  rowsContent,
   addNewField,
 }: TableDisplayProps) {
+  console.log("rowsContent", rowsContent["Value"]?.en_US?.toString());
   return (
     <Table>
       <TableHeader>
@@ -48,7 +52,11 @@ function ContentDisplay({
                 </>
               ))}
             </TableRow>
-            <Input className="bg-black text-white border-white/20 placeholder:text-white/40 focus-visible:ring-white/40" />
+            <Input
+              className="bg-black text-white border-white/20 placeholder:text-white/40 focus-visible:ring-white/40"
+              placeholder={"placeholder"}
+              defaultValue={rowsContent[row.name]?.en_US?.toString() || ""}
+            />
           </>
         ))}
 
