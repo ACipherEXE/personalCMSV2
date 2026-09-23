@@ -11,10 +11,6 @@ import {
 } from "../../ui/table";
 import { Button } from "../../ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import type {
-  entriesInterface,
-  modelInterface,
-} from "../../../interfaces/ModelInterface";
 import {
   getContentEntries,
   getContentModels,
@@ -22,12 +18,9 @@ import {
 import { useEffect, useState } from "react";
 import { formatDate } from "../../../Functions/DateFixes";
 import { contentPath } from "../../../paths/content-path";
-import { createModel } from "../../../Functions/ModelMakerAndEditor";
 import FieldPopUp from "../../custom/FieldPopUp";
-import type {
-  FeldPopUpInterface,
-  FeldPopUpOutput,
-} from "../../../interfaces/FieldPopUpInterface";
+import type { FeldPopUpOutput } from "../../../interfaces/FieldPopUpInterface";
+import type { contentInterface } from "../../../interfaces/ModelInterface";
 
 const currentPage = 1;
 const totalPages = 4;
@@ -35,7 +28,7 @@ function Contents() {
   const navigate = useNavigate();
 
   const [modelList, setModelList] = useState<string[]>([]);
-  const [entries, setEntries] = useState<entriesInterface[]>([]);
+  const [entries, setEntries] = useState<contentInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
