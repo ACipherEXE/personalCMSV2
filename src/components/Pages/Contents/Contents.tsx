@@ -24,14 +24,17 @@ import { formatDate } from "../../../Functions/DateFixes";
 import { contentPath } from "../../../paths/content-path";
 import { createModel } from "../../../Functions/ModelMakerAndEditor";
 import FieldPopUp from "../../custom/FieldPopUp";
-import type { FeldPopUpInterface } from "../../../interfaces/FieldPopUpInterface";
+import type {
+  FeldPopUpInterface,
+  FeldPopUpOutput,
+} from "../../../interfaces/FieldPopUpInterface";
 
 const currentPage = 1;
 const totalPages = 4;
 function Contents() {
   const navigate = useNavigate();
 
-  const [models, setModels] = useState<modelInterface[]>([]);
+  const [modelList, setModelList] = useState<string[]>([]);
   const [entries, setEntries] = useState<entriesInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -41,7 +44,11 @@ function Contents() {
       const models = (await getContentModels()) || [];
       const entries = (await getContentEntries()) || [];
       console.log("Fetched entries:", entries);
-      setModels(models);
+      console.log("Fetched models:", models);
+
+      setModelList(models.map((model) => model.entry_name));
+
+      // setModels(models);
       setEntries(entries);
       setIsLoading(false);
     };
@@ -59,8 +66,10 @@ function Contents() {
             "Type a name for your new content and choose a model type."
           }
           buttonText={"Create"}
-          placeholder={"Entry name"}
-          onSubmit={async function (output: FeldPopUpInterface): Promise<void> {
+          placeholder={"Name the new content Entry"}
+          dropdownPlaceholder={"Choose a Model for the new Entry"}
+          dropdownOptions={modelList}
+          onSubmit={async function (output: FeldPopUpOutput): Promise<void> {
             console.log("Create model with entry name:", output);
             // const newModel = await createModel(entryName);
             // console.log("New model created:", newModel);

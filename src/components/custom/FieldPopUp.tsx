@@ -26,7 +26,7 @@ function FieldPopUp({
   placeholder = "Placeholder",
   rowCheck = [],
   dropdownPlaceholder = null,
-  dropdownOptions = ["String", "Number", "Boolean"],
+  dropdownOptions = [],
   onSubmit,
 }: FeldPopUpInterface) {
   // The user input in the text box
@@ -41,10 +41,7 @@ function FieldPopUp({
   // Last check before passing the input back.
   const handleSubmit = () => {
     // Validate user input and selected type
-    if (
-      !userInput.trim() ||
-      (dropdownPlaceholder && dropdownOptions.length > 0 && !selectedType)
-    ) {
+    if (!userInput.trim() || (dropdownOptions.length > 0 && !selectedType)) {
       setError(true);
       return;
     }
@@ -56,6 +53,7 @@ function FieldPopUp({
       return;
     }
     onSubmit({ userInput, selectedType: selectedType ? selectedType : "" });
+    //TODO : CATCH ERRORS WHEN onSubmit fails.
     setOpen(false);
   };
   return (
@@ -104,7 +102,7 @@ function FieldPopUp({
               </p>
             </DialogDescription>
           )}
-          {dropdownPlaceholder && dropdownOptions.length > 0 && (
+          {dropdownOptions.length > 0 && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
