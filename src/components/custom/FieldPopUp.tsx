@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { CreateDialogProps } from "../../interfaces/ModelInterface";
+import type { field } from "../../interfaces/ModelInterface";
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -17,30 +17,40 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import type { FeldPopUpInterface } from "../../interfaces/FieldPopUpInterface";
 
 function FieldPopUp({
   header = "header",
   description = "description",
   buttonText = "Button",
   placeholder = "Placeholder",
-  rows = [],
+  rowCheck = [],
+  dropdownPlaceholder = "Choose",
+  dropdownOptions = ["String", "Number", "Boolean"],
   onSubmit,
-}: CreateDialogProps) {
+}: FeldPopUpInterface) {
+  // The user input in the text box
   const [userInput, setUserInput] = useState("");
-  const typeOptions = ["String", "Number", "Boolean"];
+  // The selected input of the user from the drop down. If nothing is selected a error ill occur.
   const [selectedType, setSelectedType] = useState<string | null>(null);
+  // Is the popup open or closed
   const [open, setOpen] = useState(false);
+  // Error state
   const [error, setError] = useState<boolean>(false);
 
+  // Last check before passing the input back.
   const handleSubmit = () => {
     // Validate user input and selected type
-    if (!userInput.trim() || !selectedType) return;
-    // Check if the userInput already exists in the rows array
-    if (rows.some((row) => row.name === userInput)) {
+    if (!userInput.trim() || (dropdownOptions.length > 0 && !selectedType)) {
       setError(true);
       return;
     }
-    onSubmit({ userInput, selectedType });
+    // Check if the userInput already exists in the rows array
+    if (rowCheck.some((row) => row.name === userInput)) {
+      setError(true);
+      return;
+    }
+    onSubmit({ userInput, selectedType: selectedType ? selectedType : "" });
     setOpen(false);
   };
   return (
@@ -50,7 +60,7 @@ function FieldPopUp({
         setOpen(open);
         if (!open) {
           setUserInput("");
-          setSelectedType(null);
+          setSelectedType("");
         }
       }}
     >
@@ -89,28 +99,31 @@ function FieldPopUp({
               </p>
             </DialogDescription>
           )}
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                className="w-full bg-black text-white border-white/20 hover:bg-white/10 hover:text-white"
-              >
-                {selectedType ?? "Choose a Type"}
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-full bg-black text-white border-white/20">
-              {typeOptions.map((type) => (
-                <DropdownMenuItem
-                  key={type}
-                  onSelect={() => setSelectedType(type)}
-                  className="w-full focus:bg-white focus:text-black "
+          {dropdownOptions.length > 0 && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="w-full bg-black text-white border-white/20 hover:bg-white/10 hover:text-white"
                 >
-                  {type}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+                  {dropdownPlaceholder && !selectedType
+                    ? dropdownPlaceholder
+                    : selectedType}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-full bg-black text-white border-white/20">
+                {dropdownOptions.map((type) => (
+                  <DropdownMenuItem
+                    key={type}
+                    onSelect={() => setSelectedType(type)}
+                    className="w-full focus:bg-white focus:text-black "
+                  >
+                    {type}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
 
         <DialogFooter>

@@ -1,47 +1,10 @@
-import type { ContentfulFieldValidation } from "./Validations";
+import type { field } from "./ModelInterface";
 
-export interface modelInterface {
-  uuid: string;
-  entry_name: string;
-  last_updated: string;
-  created_at: string;
-  fields: field[];
+export interface FeldPopUpOutput {
+  userInput: string;
+  selectedType: string | null;
 }
-export interface entriesInterface {
-  id: string;
-  model_uuid: string;
-  model_name: string;
-  name: string;
-  created_at: string;
-  updated_at: string;
-  fields: {
-    [fieldName: string]: LocalizedField;
-  };
-}
-
-export interface field {
-  id: string;
-  name: string;
-  type: string;
-  localized: boolean;
-  required: boolean;
-  validations?: ContentfulFieldValidation[];
-  disabled: boolean;
-  omitted: boolean;
-  items?: {
-    type: string;
-    validations?: ContentfulFieldValidation[];
-    linkType?: string;
-  };
-}
-
-type LocalizedValue = string | number | boolean;
-
-export interface LocalizedField {
-  [locale: string]: LocalizedValue | undefined;
-}
-
-export interface CreateDialogProps {
+export interface FeldPopUpInterface {
   /**header of the pop up */
   header: string;
   /**Description of what is the goal of the popup */

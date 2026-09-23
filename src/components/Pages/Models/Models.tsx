@@ -17,8 +17,12 @@ import type { modelInterface } from "../../../interfaces/ModelInterface";
 import { getContentModels } from "../../../API/superBaseAPICalls";
 import { useEffect, useState } from "react";
 import { formatDate } from "../../../Functions/DateFixes";
-import DialogPopUp from "../../custom/DialogPopUp";
 import { createModel } from "../../../Functions/ModelMakerAndEditor";
+import FieldPopUp from "../../custom/FieldPopUp";
+import type {
+  FeldPopUpInterface,
+  FeldPopUpOutput,
+} from "../../../interfaces/FieldPopUpInterface";
 
 const currentPage = 1;
 const totalPages = 4;
@@ -44,14 +48,14 @@ function Models() {
     <div className="space-y-4">
       <div className="flex justify-between items-center w-full">
         <Input placeholder="Search by entry name" className="max-w-sm" />
-        <DialogPopUp
+        <FieldPopUp
           header={"Create Model"}
           description={"Type the name of your new content model."}
           buttonText={"Create"}
           placeholder={"Entry name"}
-          onSubmit={async function (entryName: string): Promise<void> {
-            console.log("Create model with entry name:", entryName);
-            const newModel = await createModel(entryName);
+          onSubmit={async function (output: FeldPopUpOutput): Promise<void> {
+            console.log("Create model with entry name:", output);
+            const newModel = await createModel(output.userInput);
             console.log("New model created:", newModel);
             navigate(`${modelPath.modelEntry}${newModel?.uuid}`);
             throw new Error("Function not implemented.");
