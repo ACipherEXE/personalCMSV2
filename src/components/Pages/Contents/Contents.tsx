@@ -43,16 +43,26 @@ function Contents() {
       setIsLoading(true);
       const models = (await getContentModels()) || [];
       const entries = (await getContentEntries()) || [];
-      console.log("Fetched entries:", entries);
-      console.log("Fetched models:", models);
       setModelList(models.map((model) => model.entry_name));
-      // setModels(models);
       setEntries(entries);
       setIsLoading(false);
     };
 
     fetchModels();
   }, []);
+
+  /**
+   * Will tell the api to make a new model. But if the model has already been made it will throw a error.
+   * If not it will navigate to the Model page so the user can modify its structure for its use in entries.
+   * @param output - uses the output of FieldPopUp to name the new Model.
+   */
+  async function createNewContent(output: FeldPopUpOutput): Promise<void> {
+    console.log("Create model with entry name:", output);
+    // const newModel = await createEntry(output.userInput);
+    // console.log("New model created:", newModel);
+    // navigate(`${modelPath.modelEntry}${newModel?.uuid}`);
+    // throw new Error("Function not implemented.");
+  }
 
   return (
     <div className="space-y-4">
@@ -64,8 +74,8 @@ function Contents() {
             "Type a name for your new content and choose a model type."
           }
           buttonText={"Create"}
-          placeholder={"Name the new content Entry"}
-          dropdownPlaceholder={"Choose a Model for the new Entry"}
+          placeholder={"Name the new content"}
+          dropdownPlaceholder={"Choose a Model for the new Content"}
           dropdownOptions={modelList}
           onSubmit={async function (output: FeldPopUpOutput): Promise<void> {
             console.log("Create model with entry name:", output);

@@ -44,6 +44,18 @@ function Models() {
     fetchModels();
   }, []);
 
+  /**
+   * Will tell the api to make a new model. But if the model has already been made it will throw a error.
+   * If not it will navigate to the Model page so the user can modify its structure for its use in entries.
+   * @param output - uses the output of FieldPopUp to name the new Model.
+   */
+  async function createNewModel(output: FeldPopUpOutput): Promise<void> {
+    console.log("Create model with entry name:", output);
+    const newModel = await createModel(output.userInput);
+    console.log("New model created:", newModel);
+    navigate(`${modelPath.modelEntry}${newModel?.uuid}`);
+    throw new Error("Function not implemented.");
+  }
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center w-full">
@@ -53,13 +65,7 @@ function Models() {
           description={"Type the name of your new content model."}
           buttonText={"Create"}
           placeholder={"Entry name"}
-          onSubmit={async function (output: FeldPopUpOutput): Promise<void> {
-            console.log("Create model with entry name:", output);
-            const newModel = await createModel(output.userInput);
-            console.log("New model created:", newModel);
-            navigate(`${modelPath.modelEntry}${newModel?.uuid}`);
-            throw new Error("Function not implemented.");
-          }}
+          onSubmit={(output) => createNewModel(output)}
         />
       </div>
       <Table>
