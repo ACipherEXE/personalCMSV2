@@ -21,6 +21,7 @@ import { contentPath } from "../../../paths/content-path";
 import FieldPopUp from "../../custom/FieldPopUp";
 import type { FeldPopUpOutput } from "../../../interfaces/FieldPopUpInterface";
 import type { contentInterface } from "../../../interfaces/ModelInterface";
+import { createContent } from "../../../Functions/ContentMakerAndEditor";
 
 const currentPage = 1;
 const totalPages = 4;
@@ -51,6 +52,11 @@ function Contents() {
    */
   async function createNewContent(output: FeldPopUpOutput): Promise<void> {
     console.log("Create content with name:", output);
+    const newContent = await createContent(
+      output.userInput,
+      output.selectedType ?? "",
+    );
+    console.log("newContent", newContent);
     // const newModel = await createEntry(output.userInput);
     // console.log("New model created:", newModel);
     // navigate(`${modelPath.modelEntry}${newModel?.uuid}`);

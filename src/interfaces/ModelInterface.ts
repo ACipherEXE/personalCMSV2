@@ -25,8 +25,8 @@ export interface field {
 }
 
 export interface contentInterface {
-  id: string;
-  model_uuid: string;
+  id?: string;
+  model_uuid?: string;
   model_name: string;
   name: string;
   created_at: string;

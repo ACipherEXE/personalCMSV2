@@ -105,8 +105,26 @@ export const entryExists = async (uuid: string): Promise<boolean> => {
  * @param model The content model to create.
  * @returns The created content model.
  */
-export const createContentModel = async (model: modelInterface) => {
+export const createModelToAPI = async (model: modelInterface) => {
   const response = await fetch(`${SUPABASE_URL}/rest/v1/content_model`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Prefer: "return=representation",
+    },
+    body: JSON.stringify(model),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to create model: ${response.statusText}`);
+  }
+
+  const result = await response.json();
+  return result[0];
+};
+
+export const createContentToAPI = async (model: contentInterface) => {
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/content_entry`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

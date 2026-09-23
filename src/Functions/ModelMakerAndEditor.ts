@@ -1,5 +1,5 @@
 import {
-  createContentModel,
+  createModelToAPI,
   modelExists,
   updateContentModel,
 } from "../API/superBaseAPICalls";
@@ -26,7 +26,7 @@ export const createModel = async (modelName: string) => {
     created_at: new Date().toISOString(),
     last_updated: new Date().toISOString(),
   };
-  return await createContentModel(newModel);
+  return await createModelToAPI(newModel);
 };
 
 export const saveModel = (dateString: string) => {
