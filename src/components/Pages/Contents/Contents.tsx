@@ -57,7 +57,7 @@ function Contents() {
    * @param output - uses the output of FieldPopUp to name the new Model.
    */
   async function createNewContent(output: FeldPopUpOutput): Promise<void> {
-    console.log("Create model with entry name:", output);
+    console.log("Create content with name:", output);
     // const newModel = await createEntry(output.userInput);
     // console.log("New model created:", newModel);
     // navigate(`${modelPath.modelEntry}${newModel?.uuid}`);
@@ -77,13 +77,7 @@ function Contents() {
           placeholder={"Name the new content"}
           dropdownPlaceholder={"Choose a Model for the new Content"}
           dropdownOptions={modelList}
-          onSubmit={async function (output: FeldPopUpOutput): Promise<void> {
-            console.log("Create model with entry name:", output);
-            // const newModel = await createModel(entryName);
-            // console.log("New model created:", newModel);
-            // navigate(`${modelPath.modelEntry}${newModel?.uuid}`);
-            // throw new Error("Function not implemented.");
-          }}
+          onSubmit={(output) => createNewContent(output)}
         />
       </div>
       <Table>
