@@ -45,9 +45,7 @@ function Contents() {
       const entries = (await getContentEntries()) || [];
       console.log("Fetched entries:", entries);
       console.log("Fetched models:", models);
-
       setModelList(models.map((model) => model.entry_name));
-
       // setModels(models);
       setEntries(entries);
       setIsLoading(false);
