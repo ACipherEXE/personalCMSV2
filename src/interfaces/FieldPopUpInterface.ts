@@ -22,6 +22,7 @@ export interface FeldPopUpInterface {
   onSubmit: (output: { userInput: string; selectedType: string }) => void;
   /**
    * A optional check to make sure you dont have duplicates in the names of you model. Used in the model page.
+   * Pass the model that follows the field interface and we will compare the name.
    */
   rowCheck?: field[];
   /**

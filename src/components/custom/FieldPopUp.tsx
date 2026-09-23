@@ -46,7 +46,9 @@ function FieldPopUp({
       return;
     }
     // Check if the userInput already exists in the rows array
-    if (rowCheck.some((row) => row.name === userInput)) {
+    if (
+      rowCheck.some((row) => row.name.toLowerCase() === userInput.toLowerCase())
+    ) {
       setError(true);
       return;
     }
