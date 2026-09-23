@@ -28,7 +28,7 @@ export interface FeldPopUpInterface {
   /**
    *  A optional input, used to display to the user text on the button that will trigger the dropdown.
    */
-  dropdownPlaceholder?: string;
+  dropdownPlaceholder?: string | null;
   /**
    *  A optional input that will trigger the display of dropdown. Pass a string array and it will display the list in the dropdown.
    *  @example

@@ -25,7 +25,7 @@ function FieldPopUp({
   buttonText = "Button",
   placeholder = "Placeholder",
   rowCheck = [],
-  dropdownPlaceholder = "Choose",
+  dropdownPlaceholder = null,
   dropdownOptions = ["String", "Number", "Boolean"],
   onSubmit,
 }: FeldPopUpInterface) {
@@ -41,7 +41,10 @@ function FieldPopUp({
   // Last check before passing the input back.
   const handleSubmit = () => {
     // Validate user input and selected type
-    if (!userInput.trim() || (dropdownOptions.length > 0 && !selectedType)) {
+    if (
+      !userInput.trim() ||
+      (dropdownPlaceholder && dropdownOptions.length > 0 && !selectedType)
+    ) {
       setError(true);
       return;
     }
@@ -97,11 +100,11 @@ function FieldPopUp({
           {error && (
             <DialogDescription className="text-white/60">
               <p className="text-red-500 text-sm">
-                This field name is already in use.
+                TODO: ADD ERROR RESPONSES VIA COMPONENT INPUT.
               </p>
             </DialogDescription>
           )}
-          {dropdownOptions.length > 0 && (
+          {dropdownPlaceholder && dropdownOptions.length > 0 && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
