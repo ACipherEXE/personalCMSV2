@@ -1,5 +1,5 @@
 import type {
-  entriesInterface,
+  contentInterface,
   modelInterface,
 } from "../interfaces/ModelInterface";
 
@@ -22,7 +22,7 @@ export const getContentModels = async (): Promise<modelInterface[]> => {
  * A API call that gets all the content entries from the database.
  * @returns An array of content entries.
  */
-export const getContentEntries = async (): Promise<entriesInterface[]> => {
+export const getContentEntries = async (): Promise<contentInterface[]> => {
   return fetch(`${SUPABASE_URL}/rest/v1/content_entry`, {
     method: "GET",
   })
@@ -56,7 +56,7 @@ export const getSpecificContentModel = async (
  */
 export const getSpecificContentEntry = async (
   entryUuid: string,
-): Promise<entriesInterface | null> => {
+): Promise<contentInterface | null> => {
   return fetch(`${SUPABASE_URL}/rest/v1/content_entry?id=eq.${entryUuid}`, {
     method: "GET",
   })

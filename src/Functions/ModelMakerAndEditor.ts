@@ -4,7 +4,7 @@ import {
   updateContentModel,
 } from "../API/superBaseAPICalls";
 import type { modelInterface } from "../interfaces/ModelInterface";
-import { mockModelDataSkelington } from "../mockData/ModelSkelingtion";
+import { mockModelDataSkelington } from "../mockData/ModelSkellington";
 import { camelCaseGenerator } from "./StringFixes";
 /**
  * CREATE

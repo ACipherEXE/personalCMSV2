@@ -7,17 +7,6 @@ export interface modelInterface {
   created_at: string;
   fields: field[];
 }
-export interface entriesInterface {
-  id: string;
-  model_uuid: string;
-  model_name: string;
-  name: string;
-  created_at: string;
-  updated_at: string;
-  fields: {
-    [fieldName: string]: LocalizedField;
-  };
-}
 
 export interface field {
   id: string;
@@ -32,6 +21,18 @@ export interface field {
     type: string;
     validations?: ContentfulFieldValidation[];
     linkType?: string;
+  };
+}
+
+export interface contentInterface {
+  id: string;
+  model_uuid: string;
+  model_name: string;
+  name: string;
+  created_at: string;
+  updated_at: string;
+  fields: {
+    [fieldName: string]: LocalizedField;
   };
 }
 
