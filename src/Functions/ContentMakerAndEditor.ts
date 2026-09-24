@@ -17,6 +17,7 @@ export const createContent = async (
   const uuid = camelCaseGenerator(modelStructureName.toLowerCase());
   const model = await getSpecificContentModel(uuid);
 
+  // TODO: USER DEFINE THE DEFAULT LANG
   function fieldStructureGenerator(
     modelFieldStucture: field[] | null | undefined,
   ) {
