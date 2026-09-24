@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { field, LocalizedField } from "../../interfaces/ModelInterface";
 import { Input } from "../ui/input";
 import {
@@ -30,7 +31,26 @@ function ContentDisplay({
   rowsContent,
   addNewField,
 }: TableDisplayProps) {
-  console.log("rowsContent", rowsContent["Value"]?.en_US?.toString());
+  // console.log("rowsContent", rowsContent.fields["Test"]);
+  const [rowContentData, setRowContentData] = useState(rowsContent);
+
+  const updateField = (fieldName, locale, newValue) => {
+    console.log("fieldName", fieldName);
+
+    setRowContentData((prev) => ({
+      ...prev,
+      fields: {
+        ...prev.fields,
+        [fieldName]: {
+          [locale]: newValue,
+        },
+      },
+    }));
+  };
+
+  useEffect(() => {
+    console.log(rowContentData);
+  }, [rowContentData]);
   return (
     <Table>
       <TableHeader>
@@ -55,7 +75,11 @@ function ContentDisplay({
             <Input
               className="bg-black text-white border-white/20 placeholder:text-white/40 focus-visible:ring-white/40"
               placeholder={"placeholder"}
-              defaultValue={rowsContent[row.name]?.en_US?.toString() || ""}
+              defaultValue={rowContentData[row.name]?.en_US?.toString() || ""}
+              onChange={(e) => {
+                console.log(rowsContent);
+                updateField(row.name, "en_US", e.target.value);
+              }}
             />
           </>
         ))}
