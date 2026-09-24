@@ -1,7 +1,7 @@
 import {
   createModelToAPI,
   modelExists,
-  updateContentModel,
+  updateModel,
 } from "../API/superBaseAPICalls";
 import type { modelInterface } from "../interfaces/ModelInterface";
 import { mockModelDataSkelington } from "../mockData/ModelSkellington";
@@ -36,7 +36,7 @@ export const saveModel = (dateString: string) => {
 /**
  * UPDATE
  */
-export const updateModel = async (updatedData: modelInterface) => {
+export const updateModelFields = async (updatedData: modelInterface) => {
   // find the model in the database by uuid
   const exists = await modelExists(updatedData.uuid);
 
@@ -48,7 +48,7 @@ export const updateModel = async (updatedData: modelInterface) => {
       uuid: updatedData.uuid,
       last_updated: new Date().toISOString(),
     };
-    return await updateContentModel(updatedModel);
+    return await updateModel(updatedModel);
   }
   // If it doesn't, throw an error.
   throw new Error(`Model with uuid ${updatedData.uuid} does not exist.`);

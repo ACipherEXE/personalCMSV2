@@ -1,9 +1,10 @@
 import {
   createContentToAPI,
+  entryExists,
   getSpecificContentModel,
+  updateContent,
 } from "../API/superBaseAPICalls";
-import type { field } from "../interfaces/ModelInterface";
-import { mockContentDataSkelington } from "../mockData/ContentSkellington";
+import type { contentInterface, field } from "../interfaces/ModelInterface";
 import { camelCaseGenerator } from "./StringFixes";
 
 /**
@@ -44,4 +45,22 @@ export const createContent = async (
   } catch (error) {
     return newModel;
   }
+};
+
+export const updateContentFields = async (updatedData: contentInterface) => {
+  // find the model in the database by id
+  // TODO: Replace this with a error throw
+  if (!updatedData.id) return;
+  const exists = await entryExists(updatedData.id);
+
+  // If it does, update the model in the database.
+  if (exists) {
+    const updatedModel = {
+      ...updatedData,
+      updated_at: new Date().toISOString(),
+    };
+    return await updateContent(updatedModel);
+  }
+  // If it doesn't, throw an error.
+  throw new Error(`Model with uuid ${updatedData.id} does not exist.`);
 };

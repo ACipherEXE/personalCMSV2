@@ -8,7 +8,7 @@ import TableDisplay from "../../custom/TableDisplay";
 import { getSpecificContentModel } from "../../../API/superBaseAPICalls";
 import JSONDisplay from "../../custom/JSONDisplay";
 import { camelCaseGenerator } from "../../../Functions/StringFixes";
-import { updateModel } from "../../../Functions/ModelMakerAndEditor";
+import { updateModelFields } from "../../../Functions/ModelMakerAndEditor";
 
 /**
  * This is used to edit, read and add functions to models. Think of this area as a blueprint editor.
@@ -90,7 +90,7 @@ function Model() {
                       });
                       // Update the state and save the model structure
                       setModelStructure({ ...modelStructure });
-                      updateModel(modelStructure);
+                      updateModelFields(modelStructure);
                     }}
                   />
                 )}

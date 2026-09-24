@@ -146,7 +146,7 @@ export const createContentToAPI = async (model: contentInterface) => {
  * @param model The modified content model to update.
  * @returns The updated content model.
  */
-export const updateContentModel = async (model: modelInterface) => {
+export const updateModel = async (model: modelInterface) => {
   const response = await fetch(
     `${SUPABASE_URL}/rest/v1/content_model?uuid=eq.${model.uuid}`,
     {
@@ -159,6 +159,31 @@ export const updateContentModel = async (model: modelInterface) => {
         fields: model.fields,
         entry_name: model.entry_name,
         last_updated: model.last_updated,
+      }),
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to edit model: ${response.statusText}`);
+  }
+
+  const result = await response.json();
+  return result[0];
+};
+
+export const updateContent = async (model: contentInterface) => {
+  const response = await fetch(
+    `${SUPABASE_URL}/rest/v1/content_entry?uuid=eq.${model.id}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Prefer: "return=representation",
+      },
+      body: JSON.stringify({
+        fields: model.fields,
+        name: model.name,
+        updated_at: model.updated_at,
       }),
     },
   );

@@ -51,7 +51,6 @@ function Models() {
     const newModel = await createModel(output.userInput);
     console.log("New model created:", newModel);
     navigate(`${modelPath.modelEntry}${newModel?.uuid}`);
-    throw new Error("Function not implemented.");
   }
   return (
     <div className="space-y-4">
