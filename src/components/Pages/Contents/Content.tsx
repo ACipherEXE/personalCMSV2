@@ -66,6 +66,10 @@ function Content() {
           <SideBar
             sidebarItems={sidebarItems}
             onItemClick={handleSidebarClick}
+            buttonText="Publish"
+            onButtonClick={() => {
+              console.log("YEO");
+            }}
           />
         )}
         <main className="flex-1 p-4">

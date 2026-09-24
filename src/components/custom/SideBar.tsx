@@ -1,11 +1,31 @@
 /**
- * 
- * @returns 
+ *
+ * @returns
  */
 
-function SideBar({ sidebarItems, onItemClick }: { sidebarItems: string[], onItemClick: (item: string) => void }) {
+import { Button } from "../ui/button";
+
+function SideBar({
+  sidebarItems,
+  onItemClick,
+  buttonText,
+  onButtonClick,
+}: {
+  sidebarItems: string[];
+  onItemClick: (item: string) => void;
+  buttonText?: string;
+  onButtonClick?: () => void;
+}) {
   return (
     <aside className="w-48 shrink-0 border-r border-gray-700 p-4 space-y-2">
+      {buttonText && (
+        <Button
+          className="bg-black text-white border border-white/20 hover:bg-white/10 hover:text-white"
+          onClick={() => onButtonClick()}
+        >
+          {buttonText}
+        </Button>
+      )}
       {sidebarItems.map((item) => (
         <button
           key={item}
