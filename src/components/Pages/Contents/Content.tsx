@@ -4,24 +4,23 @@ import {
   getSpecificContentModel,
 } from "../../../API/superBaseAPICalls";
 import type {
-  entriesInterface,
+  contentInterface,
   modelInterface,
 } from "../../../interfaces/ModelInterface";
 import SideBar from "../../custom/SideBar";
 import { Button } from "../../ui/button";
-import { useNavigate } from "react-router-dom";
-import { modelPath } from "../../../paths/model-paths";
+import { useNavigate, useParams } from "react-router-dom";
 import JSONDisplay from "../../custom/JSONDisplay";
 import ContentDisplay from "../../custom/ContentDisplay";
 import { contentPath } from "../../../paths/content-path";
 
 function Content() {
-  const modelId = "localizationToken";
-  const entryId = "13beba48-4da1-4f0a-85da-2416c8fbb94b";
+  const { entryId } = useParams();
+  // const entryId = "13beba48-4da1-4f0a-85da-2416c8fbb94b";
   const [modelStructure, setModelStructure] = useState<modelInterface | null>(
     null,
   );
-  const [entryStructure, setEntryStructure] = useState<entriesInterface | null>(
+  const [entryStructure, setEntryStructure] = useState<contentInterface | null>(
     null,
   );
   const sidebarItems = ["Model", "JSON structure"];
@@ -35,18 +34,18 @@ function Content() {
   };
   useEffect(() => {
     const fetchSpecificModels = async () => {
-      if (!modelId) return;
-      const model = (await getSpecificContentModel(modelId)) || null;
-      const entrie = (await getSpecificContentEntry(entryId)) || null;
+      if (!entryId) return;
+      const entry = (await getSpecificContentEntry(entryId)) || null;
+      if (!entry?.model_uuid) return;
+      const model = (await getSpecificContentModel(entry?.model_uuid)) || null;
       console.log("model", model);
-      console.log("entrie", entrie);
+      console.log("entrie", entry);
       setModelStructure(model || null);
-      setEntryStructure(entrie || null);
+      setEntryStructure(entry || null);
       setIsLoading(false);
     };
-
     fetchSpecificModels();
-  }, [modelId]);
+  }, [entryId]);
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-center gap-4 p-4 border-b border-gray-700">

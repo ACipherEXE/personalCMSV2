@@ -16,13 +16,18 @@ export const createContent = async (
   // get the stucture of the model
   const uuid = camelCaseGenerator(modelStructureName.toLowerCase());
   const model = await getSpecificContentModel(uuid);
-  //   function fieldStructureGenerator(modelFieldStucture: field[] | null) {
-  //     return {
-  //       sample: {
-  //         en_us: "",
-  //       },
-  //     };
-  //   }
+
+  function fieldStructureGenerator(
+    modelFieldStucture: field[] | null | undefined,
+  ) {
+    const fields: Record<string, { en_US: string }> = {};
+    if (!modelFieldStucture) return;
+    for (const field of modelFieldStucture) {
+      fields[field.id] = { en_US: "" };
+    }
+
+    return { fields };
+  }
 
   // Set up the new Content
   const newModel = {
@@ -31,11 +36,7 @@ export const createContent = async (
     name: contentName,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
-    fields: {
-      sample: {
-        en_us: "",
-      },
-    },
+    fields: fieldStructureGenerator(model?.fields ?? []) ?? {},
   };
   try {
     return await createContentToAPI(newModel);

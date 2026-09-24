@@ -19,10 +19,7 @@ import { useEffect, useState } from "react";
 import { formatDate } from "../../../Functions/DateFixes";
 import { createModel } from "../../../Functions/ModelMakerAndEditor";
 import FieldPopUp from "../../custom/FieldPopUp";
-import type {
-  FeldPopUpInterface,
-  FeldPopUpOutput,
-} from "../../../interfaces/FieldPopUpInterface";
+import type { FeldPopUpOutput } from "../../../interfaces/FieldPopUpInterface";
 
 const currentPage = 1;
 const totalPages = 4;
@@ -84,20 +81,34 @@ function Models() {
               </TableCell>
             </TableRow>
           ) : (
-            models.map((model) => (
-              <TableRow key={model.uuid}>
-                <TableCell>
-                  <Link
-                    to={`${modelPath.modelEntry + model.uuid}`}
-                    className="text-blue-500 font-bold hover:text-blue-700 text-lg"
-                  >
-                    {model.entry_name}
-                  </Link>
-                </TableCell>
-                <TableCell>{formatDate(model.created_at)}</TableCell>
-                <TableCell>{formatDate(model.last_updated)}</TableCell>
-              </TableRow>
-            ))
+            <>
+              {models.length > 0 ? (
+                <>
+                  {models.map((model) => (
+                    <TableRow key={model.uuid}>
+                      <TableCell>
+                        <Link
+                          to={`${modelPath.modelEntry + model.uuid}`}
+                          className="text-blue-500 font-bold hover:text-blue-700 text-lg"
+                        >
+                          {model.entry_name}
+                        </Link>
+                      </TableCell>
+                      <TableCell>{formatDate(model.created_at)}</TableCell>
+                      <TableCell>{formatDate(model.last_updated)}</TableCell>
+                    </TableRow>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <TableRow>
+                    <TableCell colSpan={3} className="text-center">
+                      No Models / Something went wrong
+                    </TableCell>
+                  </TableRow>
+                </>
+              )}
+            </>
           )}
         </TableBody>
         <TableFooter>

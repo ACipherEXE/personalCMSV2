@@ -83,7 +83,7 @@ function Contents() {
         <TableHeader>
           <TableRow>
             <TableHead className="text-white">Name</TableHead>
-            <TableHead className="text-white">Content Type</TableHead>
+            <TableHead className="text-white">Model Type</TableHead>
             <TableHead className="text-white">Created</TableHead>
             <TableHead className="text-white">Last Updated</TableHead>
           </TableRow>
@@ -96,21 +96,35 @@ function Contents() {
               </TableCell>
             </TableRow>
           ) : (
-            entries.map((entrie) => (
-              <TableRow key={entrie.id}>
-                <TableCell>
-                  <Link
-                    to={`${contentPath.contentEntry + entrie.id}`}
-                    className="text-blue-500 font-bold hover:text-blue-700 text-lg"
-                  >
-                    {entrie.name}
-                  </Link>
-                </TableCell>
-                <TableCell>{entrie.model_name}</TableCell>
-                <TableCell>{formatDate(entrie.created_at)}</TableCell>
-                <TableCell>{formatDate(entrie.updated_at)}</TableCell>
-              </TableRow>
-            ))
+            <>
+              {entries.length > 0 ? (
+                <>
+                  {entries.map((entrie) => (
+                    <TableRow key={entrie.id}>
+                      <TableCell>
+                        <Link
+                          to={`${contentPath.contentEntry + entrie.id}`}
+                          className="text-blue-500 font-bold hover:text-blue-700 text-lg"
+                        >
+                          {entrie.name}
+                        </Link>
+                      </TableCell>
+                      <TableCell>{entrie.model_name}</TableCell>
+                      <TableCell>{formatDate(entrie.created_at)}</TableCell>
+                      <TableCell>{formatDate(entrie.updated_at)}</TableCell>
+                    </TableRow>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <TableRow>
+                    <TableCell colSpan={3} className="text-center">
+                      No Models / Something went wrong
+                    </TableCell>
+                  </TableRow>
+                </>
+              )}
+            </>
           )}
         </TableBody>
         <TableFooter>

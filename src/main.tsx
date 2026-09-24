@@ -25,7 +25,7 @@ createRoot(document.getElementById("root")!).render(
             />
             <Route path={contentPath.content} element={<Contents />} />
             <Route
-              path={`${contentPath.contentEntry}:contentId`}
+              path={`${contentPath.contentEntry}:entryId`}
               element={<Content />}
             />
           </Routes>
