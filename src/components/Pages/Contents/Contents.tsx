@@ -22,6 +22,7 @@ import FieldPopUp from "../../custom/FieldPopUp";
 import type { FeldPopUpOutput } from "../../../interfaces/FieldPopUpInterface";
 import type { contentInterface } from "../../../interfaces/ModelInterface";
 import { createContent } from "../../../Functions/ContentMakerAndEditor";
+import { modelPath } from "../../../paths/model-paths";
 
 const currentPage = 1;
 const totalPages = 4;
@@ -57,10 +58,7 @@ function Contents() {
       output.selectedType ?? "",
     );
     console.log("newContent", newContent);
-    // const newModel = await createEntry(output.userInput);
-    // console.log("New model created:", newModel);
-    // navigate(`${modelPath.modelEntry}${newModel?.uuid}`);
-    // throw new Error("Function not implemented.");
+    navigate(`${contentPath.contentEntry}${newContent?.id}`);
   }
 
   return (
