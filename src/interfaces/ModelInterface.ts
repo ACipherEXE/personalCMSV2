@@ -31,9 +31,11 @@ export interface contentInterface {
   name: string;
   created_at: string;
   updated_at: string;
-  fields: {
-    [fieldName: string]: LocalizedField;
-  };
+  fields: contentFieldsInterface;
+}
+
+export interface contentFieldsInterface {
+  [fieldName: string]: LocalizedField;
 }
 
 type LocalizedValue = string | number | boolean;

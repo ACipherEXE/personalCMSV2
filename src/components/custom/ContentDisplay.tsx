@@ -35,15 +35,10 @@ function ContentDisplay({
   const [rowContentData, setRowContentData] = useState(rowsContent);
 
   const updateField = (fieldName, locale, newValue) => {
-    console.log("fieldName", fieldName);
-
     setRowContentData((prev) => ({
       ...prev,
-      fields: {
-        ...prev.fields,
-        [fieldName]: {
-          [locale]: newValue,
-        },
+      [fieldName]: {
+        [locale]: newValue,
       },
     }));
   };
@@ -66,7 +61,7 @@ function ContentDisplay({
         {rows.map((row, i) => (
           <>
             <TableRow key={i}>
-              {rowKeys.map((key) => (
+              {rowKeys.map((key: string) => (
                 <>
                   <TableCell key={key}>{row[key]}</TableCell>
                 </>
@@ -77,7 +72,6 @@ function ContentDisplay({
               placeholder={"placeholder"}
               defaultValue={rowContentData[row.name]?.en_US?.toString() || ""}
               onChange={(e) => {
-                console.log(rowsContent);
                 updateField(row.name, "en_US", e.target.value);
               }}
             />
