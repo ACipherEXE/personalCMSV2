@@ -31,6 +31,7 @@ function ContentDisplay({
   rowsContent,
   modifiedContent,
 }: TableDisplayProps) {
+  console.log("rowsContent", rowsContent);
   const [rowContentData, setRowContentData] = useState(rowsContent);
 
   const updateField = (fieldName: string, locale: string, newValue: string) => {
@@ -71,7 +72,7 @@ function ContentDisplay({
             <Input
               className="bg-black text-white border-white/20 placeholder:text-white/40 focus-visible:ring-white/40"
               placeholder={"Empty"}
-              defaultValue={rowContentData[row.name]?.en_US?.toString() || ""}
+              defaultValue={rowContentData[row.id]?.en_US?.toString() || ""}
               onChange={(e) => {
                 updateField(row.name, "en_US", e.target.value);
               }}

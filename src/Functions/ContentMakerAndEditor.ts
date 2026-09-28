@@ -25,10 +25,12 @@ export const createContent = async (
     const fields: Record<string, { en_US: string }> = {};
     if (!modelFieldStucture) return;
     for (const field of modelFieldStucture) {
-      fields[field.id] = { en_US: "" };
+      fields[field.id] = {
+        en_US: field.id === "key" ? camelCaseGenerator(contentName) : "",
+      };
     }
 
-    return { fields };
+    return fields;
   }
 
   // Set up the new Content

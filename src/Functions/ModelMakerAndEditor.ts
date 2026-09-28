@@ -12,7 +12,8 @@ import { camelCaseGenerator } from "./StringFixes";
 // Creates a model and adds it to the database. Returns the created model.
 export const createModel = async (modelName: string) => {
   // make it a uuid by camelcasing the model name
-  const uuid = camelCaseGenerator(modelName);
+  const uuid = camelCaseGenerator(modelName.toLowerCase());
+  console.log;
   // First check if the model already exists in the database. If it does, throw an error.
   const exists = await modelExists(uuid);
   if (exists) {
