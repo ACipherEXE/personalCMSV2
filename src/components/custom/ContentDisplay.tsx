@@ -31,7 +31,6 @@ function ContentDisplay({
   rowsContent,
   modifiedContent,
 }: TableDisplayProps) {
-  console.log("rowsContent", rowsContent);
   const [rowContentData, setRowContentData] = useState(rowsContent);
 
   const updateField = (fieldName: string, locale: string, newValue: string) => {

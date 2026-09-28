@@ -13,10 +13,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import JSONDisplay from "../../custom/JSONDisplay";
 import ContentDisplay from "../../custom/ContentDisplay";
 import { contentPath } from "../../../paths/content-path";
+import { updateContentFields } from "../../../Functions/ContentMakerAndEditor";
 
 function Content() {
   const { entryId } = useParams();
-  // const entryId = "13beba48-4da1-4f0a-85da-2416c8fbb94b";
   const [modelStructure, setModelStructure] = useState<modelInterface | null>(
     null,
   );
@@ -38,14 +38,13 @@ function Content() {
       const entry = (await getSpecificContentEntry(entryId)) || null;
       if (!entry?.model_uuid) return;
       const model = (await getSpecificContentModel(entry?.model_uuid)) || null;
-      console.log("model", model);
-      console.log("entrie", entry);
       setModelStructure(model || null);
       setEntryStructure(entry || null);
       setIsLoading(false);
     };
     fetchSpecificContent();
   }, [entryId]);
+
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-center gap-4 p-4 border-b border-gray-700">
@@ -68,7 +67,8 @@ function Content() {
             onItemClick={handleSidebarClick}
             buttonText="Publish"
             onButtonClick={() => {
-              console.log("YEO");
+              if (!entryStructure) return;
+              updateContentFields(entryStructure);
             }}
           />
         )}
@@ -87,7 +87,13 @@ function Content() {
                     rowsContent={entryStructure?.fields || {}}
                     rowKeys={["name"]}
                     modifiedContent={(output) => {
-                      console.log(output);
+                      setEntryStructure((prev) => {
+                        if (!prev) return prev;
+                        return {
+                          ...prev,
+                          fields: output,
+                        };
+                      });
                     }}
                   />
                 )}

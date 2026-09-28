@@ -47,9 +47,7 @@ function Models() {
    * @param output - uses the output of FieldPopUp to name the new Model.
    */
   async function createNewModel(output: FeldPopUpOutput): Promise<void> {
-    console.log("Create model with entry name:", output);
     const newModel = await createModel(output.userInput);
-    console.log("New model created:", newModel);
     navigate(`${modelPath.modelEntry}${newModel?.uuid}`);
   }
   return (

@@ -88,9 +88,9 @@ export const modelExists = async (uuid: string): Promise<boolean> => {
  * @param uuid The UUID of the content entry to check.
  * @returns True if the entry exists, otherwise false.
  */
-export const entryExists = async (uuid: string): Promise<boolean> => {
+export const entryExists = async (id: string): Promise<boolean> => {
   const response = await fetch(
-    `${SUPABASE_URL}/rest/v1/content_entry?uuid=eq.${uuid}&select=uuid`,
+    `${SUPABASE_URL}/rest/v1/content_entry?id=eq.${id}&select=id`,
     {
       method: "GET",
     },
@@ -173,7 +173,7 @@ export const updateModel = async (model: modelInterface) => {
 
 export const updateContent = async (model: contentInterface) => {
   const response = await fetch(
-    `${SUPABASE_URL}/rest/v1/content_entry?uuid=eq.${model.id}`,
+    `${SUPABASE_URL}/rest/v1/content_entry?id=eq.${model.id}`,
     {
       method: "PATCH",
       headers: {
