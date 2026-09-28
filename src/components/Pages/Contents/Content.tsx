@@ -33,7 +33,7 @@ function Content() {
     setSelectedSidebarItem(item);
   };
   useEffect(() => {
-    const fetchSpecificModels = async () => {
+    const fetchSpecificContent = async () => {
       if (!entryId) return;
       const entry = (await getSpecificContentEntry(entryId)) || null;
       if (!entry?.model_uuid) return;
@@ -44,7 +44,7 @@ function Content() {
       setEntryStructure(entry || null);
       setIsLoading(false);
     };
-    fetchSpecificModels();
+    fetchSpecificContent();
   }, [entryId]);
   return (
     <div className="flex flex-col h-full">
@@ -86,6 +86,9 @@ function Content() {
                     rows={modelStructure.fields}
                     rowsContent={entryStructure?.fields || {}}
                     rowKeys={["name"]}
+                    modifiedContent={(output) => {
+                      console.log(output);
+                    }}
                   />
                 )}
               {selectedSidebarItem === sidebarItems[1] &&

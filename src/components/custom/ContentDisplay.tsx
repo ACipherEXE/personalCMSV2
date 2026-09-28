@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import type { field, LocalizedField } from "../../interfaces/ModelInterface";
+import type {
+  contentFieldsInterface,
+  field,
+  LocalizedField,
+} from "../../interfaces/ModelInterface";
 import { Input } from "../ui/input";
 import {
   Table,
@@ -9,7 +13,6 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import FieldPopUp from "./FieldPopUp";
 
 interface TableDisplayProps {
   headers: string[];
@@ -18,6 +21,7 @@ interface TableDisplayProps {
     [fieldName: string]: LocalizedField;
   };
   rowKeys: string[];
+  modifiedContent: (output: contentFieldsInterface) => void;
 }
 
 function ContentDisplay({
@@ -25,10 +29,12 @@ function ContentDisplay({
   rows,
   rowKeys,
   rowsContent,
+  modifiedContent,
 }: TableDisplayProps) {
   const [rowContentData, setRowContentData] = useState(rowsContent);
 
   const updateField = (fieldName: string, locale: string, newValue: string) => {
+    if (!locale) return;
     setRowContentData((prev) => ({
       ...prev,
       [fieldName]: {
@@ -38,7 +44,8 @@ function ContentDisplay({
   };
 
   useEffect(() => {
-    console.log(rowContentData);
+    // Send back the latest to content every change!
+    modifiedContent(rowContentData);
   }, [rowContentData]);
   return (
     <Table>
