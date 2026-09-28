@@ -18,10 +18,6 @@ interface TableDisplayProps {
     [fieldName: string]: LocalizedField;
   };
   rowKeys: string[];
-  addNewField?: (fieldData: {
-    userInput: string;
-    selectedType: string | null;
-  }) => void;
 }
 
 function ContentDisplay({
@@ -29,12 +25,10 @@ function ContentDisplay({
   rows,
   rowKeys,
   rowsContent,
-  addNewField,
 }: TableDisplayProps) {
-  // console.log("rowsContent", rowsContent.fields["Test"]);
   const [rowContentData, setRowContentData] = useState(rowsContent);
 
-  const updateField = (fieldName, locale, newValue) => {
+  const updateField = (fieldName: string, locale: string, newValue: string) => {
     setRowContentData((prev) => ({
       ...prev,
       [fieldName]: {
@@ -61,7 +55,7 @@ function ContentDisplay({
         {rows.map((row, i) => (
           <>
             <TableRow key={i}>
-              {rowKeys.map((key: string) => (
+              {rowKeys.map((key) => (
                 <>
                   <TableCell key={key}>{row[key]}</TableCell>
                 </>
@@ -69,7 +63,7 @@ function ContentDisplay({
             </TableRow>
             <Input
               className="bg-black text-white border-white/20 placeholder:text-white/40 focus-visible:ring-white/40"
-              placeholder={"placeholder"}
+              placeholder={"Empty"}
               defaultValue={rowContentData[row.name]?.en_US?.toString() || ""}
               onChange={(e) => {
                 updateField(row.name, "en_US", e.target.value);
@@ -77,26 +71,6 @@ function ContentDisplay({
             />
           </>
         ))}
-
-        <TableRow>
-          {addNewField && (
-            <TableCell
-              colSpan={headers.length}
-              className="text-center text-blue-500 font-bold hover:text-blue-700 cursor-pointer"
-            >
-              <FieldPopUp
-                header={"Create Field"}
-                description={"Type the name of your new field."}
-                buttonText={"Add New Field"}
-                placeholder={"Field name"}
-                onSubmit={({ userInput, selectedType }) => {
-                  addNewField({ userInput, selectedType });
-                }}
-                rows={rows}
-              />
-            </TableCell>
-          )}
-        </TableRow>
       </TableBody>
     </Table>
   );
