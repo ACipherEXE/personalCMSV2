@@ -73,7 +73,7 @@ function ContentDisplay({
               placeholder={"Empty"}
               defaultValue={rowContentData[row.id]?.en_US?.toString() || ""}
               onChange={(e) => {
-                updateField(row.name, "en_US", e.target.value);
+                updateField(row.id, "en_US", e.target.value);
               }}
             />
           </>
