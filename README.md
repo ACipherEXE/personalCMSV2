@@ -59,10 +59,10 @@ create table content_entry (
 create index idx_content_entry_model on content_entry(model_uuid);
 create index idx_content_entry_fields_gin on content_entry using gin (fields);
 
-- Now "npm run dev" 
+- Now "npm run dev" on a terminal pointing at the project.
 - It should open a window or click the link that was provided in the terminal
 
-- Now make Models then make entries 
+- Now make Models then make Entries. 
 
 
 
