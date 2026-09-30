@@ -1,6 +1,8 @@
 # personalCMSV2
 An open-source CMS (Not finished)
 
+All work is subject to change, and the database structure as well. 
+
 <img width="1361" height="1020" alt="image" src="https://github.com/user-attachments/assets/86427979-a7c4-454f-99d3-bb831943fff3" />
 
 <img width="1368" height="1009" alt="image" src="https://github.com/user-attachments/assets/0f3e2244-b042-47c5-9993-9c0ca312c6c5" />
