@@ -83,29 +83,18 @@ function Model() {
                     headers={["Name", "Type"]}
                     rows={modelStructure.fields}
                     rowKeys={["name", "type"]}
-                    addNewField={({ userInput, selectedType }) => {
+                    dropdownOptions={["String", "Symbol", "Number", "Text"]}
+                    addNewField={async ({ userInput, selectedType }) => {
                       console.log("userInput", userInput);
                       console.log("selectedType", selectedType);
                       if (modelId) {
-                        addNewFieldToSpecificContentModel(
+                        var result = addNewFieldToSpecificContentModel(
                           modelId,
                           userInput,
                           selectedType || "string",
                         );
+                        setModelStructure(await result);
                       }
-                      // // Handle adding a new field here
-                      // modelStructure.fields.push({
-                      //   name: userInput,
-                      //   type: selectedType || "string",
-                      //   id: camelCaseGenerator(userInput),
-                      //   localized: false,
-                      //   required: false,
-                      //   disabled: false,
-                      //   omitted: false,
-                      // });
-                      // // Update the state and save the model structure
-                      // setModelStructure({ ...modelStructure });
-                      // updateModelFields(modelStructure);
                     }}
                   />
                 )}

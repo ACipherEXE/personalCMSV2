@@ -42,10 +42,10 @@ export const addNewFieldToSpecificContentModel = async (
   FieldType: string,
 ): Promise<modelInterface | null> => {
   const response = await fetch(`${MIDDLE_API}/model/field/${modelUuid}`, {
-    method: "PATCH",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Prefer: "return=representation",
+      Accept: "application/json",
     },
     body: JSON.stringify({
       FieldName: FieldName,
@@ -58,5 +58,5 @@ export const addNewFieldToSpecificContentModel = async (
   }
 
   const result = await response.json();
-  return result[0];
+  return result;
 };

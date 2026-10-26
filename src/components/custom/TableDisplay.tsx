@@ -17,6 +17,7 @@ interface TableDisplayProps {
     userInput: string;
     selectedType: string | null;
   }) => void;
+  dropdownOptions?: string[];
 }
 
 function TableDisplay({
@@ -24,6 +25,7 @@ function TableDisplay({
   rows,
   rowKeys,
   addNewField,
+  dropdownOptions = [],
 }: TableDisplayProps) {
   return (
     <Table>
@@ -59,7 +61,7 @@ function TableDisplay({
                   addNewField({ userInput, selectedType });
                 }}
                 dropdownPlaceholder="Choose a type"
-                dropdownOptions={["string"]}
+                dropdownOptions={dropdownOptions}
                 rows={rows}
               />
             </TableCell>
