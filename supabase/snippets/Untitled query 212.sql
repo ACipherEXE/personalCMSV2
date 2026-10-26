@@ -1,18 +1,17 @@
--- Content model definitions (mirrors your modelInterface objects)
 create table content_model (
-  uuid text primary key,          -- matches your `uuid` field, e.g. "localizationToken"
-  entry_name text not null,       -- "Localization Token"
-  fields jsonb not null,          -- the whole `fields` array, verbatim
+  uuid text primary key,
+  entry_name text not null unique,
+  fields jsonb not null,
   created_at timestamptz not null default now(),
   last_updated timestamptz not null default now()
 );
 
--- Entries for any content model
 create table content_entry (
   id uuid primary key default gen_random_uuid(),
   model_uuid text not null references content_model(uuid),
+  model_name text not null references content_model(entry_name),
+  name text not null,
   fields jsonb not null default '{}'::jsonb,
-  -- shape: { "key": "some.token.key", "value": { "en-US": "Hello", "fr-FR": "Bonjour" } }
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
