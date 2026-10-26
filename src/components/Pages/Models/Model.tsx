@@ -5,10 +5,15 @@ import { modelPath } from "../../../paths/model-paths";
 import { useEffect, useState } from "react";
 import type { modelInterface } from "../../../interfaces/ModelInterface";
 import TableDisplay from "../../custom/TableDisplay";
-import { getSpecificContentModel } from "../../../API/superBaseAPICalls";
+// import { getSpecificContentModel } from "../../../API/superBaseAPICalls";
+
 import JSONDisplay from "../../custom/JSONDisplay";
 import { camelCaseGenerator } from "../../../Functions/StringFixes";
 import { updateModelFields } from "../../../Functions/ModelMakerAndEditor";
+import {
+  addNewFieldToSpecificContentModel,
+  getSpecificContentModel,
+} from "../../../API/MiddlewareAPICalls";
 
 /**
  * This is used to edit, read and add functions to models. Think of this area as a blueprint editor.
@@ -32,6 +37,7 @@ function Model() {
 
   useEffect(() => {
     const fetchSpecificModels = async () => {
+      console.log("modelId", modelId);
       if (!modelId) return;
       setIsLoading(true);
       const model = (await getSpecificContentModel(modelId)) || null;
@@ -53,7 +59,7 @@ function Model() {
           ← Back
         </Button>
         <h1 className="text-white text-xl font-semibold">
-          {modelStructure?.entry_name ?? "Loading..."}
+          {modelStructure?.entryName ?? "Loading..."}
         </h1>
       </div>
 
@@ -78,19 +84,28 @@ function Model() {
                     rows={modelStructure.fields}
                     rowKeys={["name", "type"]}
                     addNewField={({ userInput, selectedType }) => {
-                      // Handle adding a new field here
-                      modelStructure.fields.push({
-                        name: userInput,
-                        type: selectedType || "string",
-                        id: camelCaseGenerator(userInput),
-                        localized: false,
-                        required: false,
-                        disabled: false,
-                        omitted: false,
-                      });
-                      // Update the state and save the model structure
-                      setModelStructure({ ...modelStructure });
-                      updateModelFields(modelStructure);
+                      console.log("userInput", userInput);
+                      console.log("selectedType", selectedType);
+                      if (modelId) {
+                        addNewFieldToSpecificContentModel(
+                          modelId,
+                          userInput,
+                          selectedType || "string",
+                        );
+                      }
+                      // // Handle adding a new field here
+                      // modelStructure.fields.push({
+                      //   name: userInput,
+                      //   type: selectedType || "string",
+                      //   id: camelCaseGenerator(userInput),
+                      //   localized: false,
+                      //   required: false,
+                      //   disabled: false,
+                      //   omitted: false,
+                      // });
+                      // // Update the state and save the model structure
+                      // setModelStructure({ ...modelStructure });
+                      // updateModelFields(modelStructure);
                     }}
                   />
                 )}

@@ -58,6 +58,8 @@ function TableDisplay({
                 onSubmit={({ userInput, selectedType }) => {
                   addNewField({ userInput, selectedType });
                 }}
+                dropdownPlaceholder="Choose a type"
+                dropdownOptions={["string"]}
                 rows={rows}
               />
             </TableCell>
