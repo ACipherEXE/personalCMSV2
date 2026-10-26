@@ -7,7 +7,7 @@ function App() {
       <div className="min-h-screen bg-black">
         <div>
           Thiss is the main page where we will display everything that could be
-          intresting from everything we have put in the project. Think data dog
+          intresting from everything we have put in the project. Think data dogs
         </div>
       </div>
     </>
