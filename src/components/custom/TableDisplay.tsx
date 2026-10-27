@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "../ui/table";
 import FieldPopUp from "./FieldPopUp";
+import React from "react";
 
 interface TableDisplayProps {
   headers: string[];
@@ -45,11 +46,9 @@ function TableDisplay({
       <TableHeader>
         <TableRow>
           {headers.map((header, i) => (
-            <>
-              <TableHead key={i} className="text-white">
-                {header}
-              </TableHead>
-            </>
+            <TableHead key={i} className="text-white">
+              {header}
+            </TableHead>
           ))}
         </TableRow>
       </TableHeader>
@@ -57,7 +56,7 @@ function TableDisplay({
         {rows.map((row, i) => (
           <TableRow key={i}>
             {rowKeys.map((key) => (
-              <>
+              <React.Fragment key={key}>
                 {key === "action" && removeField ? (
                   <TableCell key={key}>
                     <Button
@@ -71,7 +70,7 @@ function TableDisplay({
                 ) : (
                   <TableCell key={key}>{row[key]}</TableCell>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </TableRow>
         ))}
