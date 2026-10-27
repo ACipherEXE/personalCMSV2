@@ -80,7 +80,7 @@ function Model() {
               {selectedSidebarItem === sidebarItems[0] &&
                 modelStructure?.fields && (
                   <TableDisplay
-                    headers={["Name", "Type"]}
+                    headers={["Name", "Type", "Action"]}
                     rows={modelStructure.fields}
                     rowKeys={["name", "type", "action"]}
                     dropdownOptions={["String", "Symbol", "Number", "Text"]}
