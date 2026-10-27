@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import type { field } from "../../interfaces/ModelInterface";
+import { Button } from "../ui/button";
 import {
   Table,
   TableBody,
@@ -17,6 +19,7 @@ interface TableDisplayProps {
     userInput: string;
     selectedType: string | null;
   }) => void;
+  removeField?: (fieldName: string) => void;
   dropdownOptions?: string[];
 }
 
@@ -26,15 +29,18 @@ function TableDisplay({
   rowKeys,
   addNewField,
   dropdownOptions = [],
+  removeField,
 }: TableDisplayProps) {
   return (
     <Table>
       <TableHeader>
         <TableRow>
           {headers.map((header, i) => (
-            <TableHead key={i} className="text-white">
-              {header}
-            </TableHead>
+            <>
+              <TableHead key={i} className="text-white">
+                {header}
+              </TableHead>
+            </>
           ))}
         </TableRow>
       </TableHeader>
@@ -42,7 +48,21 @@ function TableDisplay({
         {rows.map((row, i) => (
           <TableRow key={i}>
             {rowKeys.map((key) => (
-              <TableCell key={key}>{row[key]}</TableCell>
+              <>
+                {key === "action" && removeField ? (
+                  <TableCell key={key}>
+                    <Button
+                      type="submit"
+                      onClick={() => removeField(rows[i].name)}
+                      className="bg-black text-red-500 hover:bg-white/80"
+                    >
+                      Remove
+                    </Button>
+                  </TableCell>
+                ) : (
+                  <TableCell key={key}>{row[key]}</TableCell>
+                )}
+              </>
             ))}
           </TableRow>
         ))}

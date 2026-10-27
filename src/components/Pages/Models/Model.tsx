@@ -11,8 +11,9 @@ import JSONDisplay from "../../custom/JSONDisplay";
 import { camelCaseGenerator } from "../../../Functions/StringFixes";
 import { updateModelFields } from "../../../Functions/ModelMakerAndEditor";
 import {
-  addNewFieldToSpecificContentModel,
+  addFieldToContentModel,
   getSpecificContentModel,
+  removeFieldFromContentModel,
 } from "../../../API/MiddlewareAPICalls";
 
 /**
@@ -37,7 +38,6 @@ function Model() {
 
   useEffect(() => {
     const fetchSpecificModels = async () => {
-      console.log("modelId", modelId);
       if (!modelId) return;
       setIsLoading(true);
       const model = (await getSpecificContentModel(modelId)) || null;
@@ -82,16 +82,23 @@ function Model() {
                   <TableDisplay
                     headers={["Name", "Type"]}
                     rows={modelStructure.fields}
-                    rowKeys={["name", "type"]}
+                    rowKeys={["name", "type", "action"]}
                     dropdownOptions={["String", "Symbol", "Number", "Text"]}
                     addNewField={async ({ userInput, selectedType }) => {
-                      console.log("userInput", userInput);
-                      console.log("selectedType", selectedType);
                       if (modelId) {
-                        var result = addNewFieldToSpecificContentModel(
+                        var result = addFieldToContentModel(
                           modelId,
                           userInput,
                           selectedType || "string",
+                        );
+                        setModelStructure(await result);
+                      }
+                    }}
+                    removeField={async (fieldName) => {
+                      if (modelId) {
+                        var result = removeFieldFromContentModel(
+                          modelId,
+                          fieldName,
                         );
                         setModelStructure(await result);
                       }
