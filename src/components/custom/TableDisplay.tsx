@@ -27,9 +27,9 @@ interface TableDisplayProps {
  * @param headers A array to describe the pillars of data below it
  * @param rows A array based on the interface of fields, this is the data you want to display to the user
  * @param rowKeys A array that uses the variables in the fields to display
- * @param addNewField A void function that passes back the pop up input on user submit add a function to use the output
- * @param dropdownOptions A array of options the pop up dropdown so the user can choose.
- * @param removeField  A void function that passes back the field name add a function to use the output
+ * @param addNewField (Optional) A void function that passes back the pop up input on user submit add a function to use the output
+ * @param dropdownOptions (Optional) A array of options the pop up dropdown so the user can choose.
+ * @param removeField (Optional)  A void function that passes back the field name add a function to use the output
  * @returns The table display component
  */
 function TableDisplay({
