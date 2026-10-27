@@ -54,7 +54,7 @@ function TableDisplay({
                     <Button
                       type="submit"
                       onClick={() => removeField(rows[i].name)}
-                      className="bg-black text-red-500 hover:bg-white/80"
+                      className="bg-black text-red-500 border-red-500"
                     >
                       Remove
                     </Button>

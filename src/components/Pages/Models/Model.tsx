@@ -86,21 +86,20 @@ function Model() {
                     dropdownOptions={["String", "Symbol", "Number", "Text"]}
                     addNewField={async ({ userInput, selectedType }) => {
                       if (modelId) {
-                        var result = addFieldToContentModel(
-                          modelId,
-                          userInput,
-                          selectedType || "string",
+                        setModelStructure(
+                          await addFieldToContentModel(
+                            modelId,
+                            userInput,
+                            selectedType || "string",
+                          ),
                         );
-                        setModelStructure(await result);
                       }
                     }}
                     removeField={async (fieldName) => {
                       if (modelId) {
-                        var result = removeFieldFromContentModel(
-                          modelId,
-                          fieldName,
+                        setModelStructure(
+                          await removeFieldFromContentModel(modelId, fieldName),
                         );
-                        setModelStructure(await result);
                       }
                     }}
                   />
