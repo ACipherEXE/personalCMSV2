@@ -27,10 +27,10 @@ export interface field {
 export interface contentInterface {
   id?: string;
   model_uuid?: string;
-  model_name: string;
+  modelName: string;
   name: string;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
   fields: contentFieldsInterface;
 }
 

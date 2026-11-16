@@ -98,3 +98,17 @@ export const removeFieldFromContentModel = async (
   const result = await response.json();
   return result;
 };
+
+/**
+ * A API call that gets all the content models from the database.
+ * @returns An array of content models.
+ */
+export const getContentEntries = async (): Promise<contentInterface[]> => {
+  return fetch(`${MIDDLE_API}/entries`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      return result;
+    });
+};

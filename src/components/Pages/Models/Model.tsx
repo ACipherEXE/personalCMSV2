@@ -5,11 +5,7 @@ import { modelPath } from "../../../paths/model-paths";
 import { useEffect, useState } from "react";
 import type { modelInterface } from "../../../interfaces/ModelInterface";
 import TableDisplay from "../../custom/TableDisplay";
-// import { getSpecificContentModel } from "../../../API/superBaseAPICalls";
-
 import JSONDisplay from "../../custom/JSONDisplay";
-import { camelCaseGenerator } from "../../../Functions/StringFixes";
-import { updateModelFields } from "../../../Functions/ModelMakerAndEditor";
 import {
   addFieldToContentModel,
   getSpecificContentModel,
