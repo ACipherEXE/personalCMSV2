@@ -11,10 +11,14 @@ import {
 } from "../../ui/table";
 import { Button } from "../../ui/button";
 import { Link, useNavigate } from "react-router-dom";
+// import {
+//   getContentEntries,
+//   getContentModels,
+// } from "../../../API/superBaseAPICalls";
 import {
   getContentEntries,
   getContentModels,
-} from "../../../API/superBaseAPICalls";
+} from "../../../API/MiddlewareAPICalls";
 import { useEffect, useState } from "react";
 import { formatDate } from "../../../Functions/DateFixes";
 import { contentPath } from "../../../paths/content-path";
@@ -22,7 +26,6 @@ import FieldPopUp from "../../custom/FieldPopUp";
 import type { FeldPopUpOutput } from "../../../interfaces/FieldPopUpInterface";
 import type { contentInterface } from "../../../interfaces/ModelInterface";
 import { createContent } from "../../../Functions/ContentMakerAndEditor";
-import { modelPath } from "../../../paths/model-paths";
 
 const currentPage = 1;
 const totalPages = 4;
@@ -38,7 +41,9 @@ function Contents() {
       setIsLoading(true);
       const models = (await getContentModels()) || [];
       const entries = (await getContentEntries()) || [];
-      setModelList(models.map((model) => model.entry_name));
+      console.log("models", models);
+      console.log("entries", entries);
+      setModelList(models.map((model) => model.entryName));
       setEntries(entries);
       setIsLoading(false);
     };
@@ -107,9 +112,9 @@ function Contents() {
                           {entrie.name}
                         </Link>
                       </TableCell>
-                      <TableCell>{entrie.model_name}</TableCell>
-                      <TableCell>{formatDate(entrie.created_at)}</TableCell>
-                      <TableCell>{formatDate(entrie.updated_at)}</TableCell>
+                      <TableCell>{entrie.modelName}</TableCell>
+                      <TableCell>{formatDate(entrie.createdAt)}</TableCell>
+                      <TableCell>{formatDate(entrie.updatedAt)}</TableCell>
                     </TableRow>
                   ))}
                 </>

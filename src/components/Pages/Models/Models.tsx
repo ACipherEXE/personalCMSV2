@@ -14,12 +14,13 @@ import { Button } from "../../ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { modelPath } from "../../../paths/model-paths";
 import type { modelInterface } from "../../../interfaces/ModelInterface";
-import { getContentModels } from "../../../API/superBaseAPICalls";
+// import { getContentModels } from "../../../API/superBaseAPICalls";
 import { useEffect, useState } from "react";
 import { formatDate } from "../../../Functions/DateFixes";
 import { createModel } from "../../../Functions/ModelMakerAndEditor";
 import FieldPopUp from "../../custom/FieldPopUp";
 import type { FeldPopUpOutput } from "../../../interfaces/FieldPopUpInterface";
+import { getContentModels } from "../../../API/MiddlewareAPICalls";
 
 const currentPage = 1;
 const totalPages = 4;
@@ -88,11 +89,11 @@ function Models() {
                           to={`${modelPath.modelEntry + model.uuid}`}
                           className="text-blue-500 font-bold hover:text-blue-700 text-lg"
                         >
-                          {model.entry_name}
+                          {model.entryName}
                         </Link>
                       </TableCell>
-                      <TableCell>{formatDate(model.created_at)}</TableCell>
-                      <TableCell>{formatDate(model.last_updated)}</TableCell>
+                      <TableCell>{formatDate(model.createdAt)}</TableCell>
+                      <TableCell>{formatDate(model.lastUpdated)}</TableCell>
                     </TableRow>
                   ))}
                 </>

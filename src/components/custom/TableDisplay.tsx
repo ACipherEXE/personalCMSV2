@@ -1,4 +1,5 @@
 import type { field } from "../../interfaces/ModelInterface";
+import { Button } from "../ui/button";
 import {
   Table,
   TableBody,
@@ -8,6 +9,7 @@ import {
   TableRow,
 } from "../ui/table";
 import FieldPopUp from "./FieldPopUp";
+import React from "react";
 
 interface TableDisplayProps {
   headers: string[];
@@ -17,13 +19,26 @@ interface TableDisplayProps {
     userInput: string;
     selectedType: string | null;
   }) => void;
+  removeField?: (fieldName: string) => void;
+  dropdownOptions?: string[];
 }
-
+/**
+ * Used to display Model entries and edit them
+ * @param headers A array to describe the pillars of data below it
+ * @param rows A array based on the interface of fields, this is the data you want to display to the user
+ * @param rowKeys A array that uses the variables in the fields to display
+ * @param addNewField (Optional) A void function that passes back the pop up input on user submit add a function to use the output
+ * @param dropdownOptions (Optional) A array of options the pop up dropdown so the user can choose.
+ * @param removeField (Optional)  A void function that passes back the field name add a function to use the output
+ * @returns The table display component
+ */
 function TableDisplay({
   headers,
   rows,
   rowKeys,
   addNewField,
+  dropdownOptions = [],
+  removeField,
 }: TableDisplayProps) {
   return (
     <Table>
@@ -40,7 +55,21 @@ function TableDisplay({
         {rows.map((row, i) => (
           <TableRow key={i}>
             {rowKeys.map((key) => (
-              <TableCell key={key}>{row[key]}</TableCell>
+              <React.Fragment key={key}>
+                {key === "action" && removeField ? (
+                  <TableCell key={key}>
+                    <Button
+                      type="submit"
+                      onClick={() => removeField(rows[i].name)}
+                      className="bg-black text-red-500 border-red-500"
+                    >
+                      Remove
+                    </Button>
+                  </TableCell>
+                ) : (
+                  <TableCell key={key}>{row[key]}</TableCell>
+                )}
+              </React.Fragment>
             ))}
           </TableRow>
         ))}
@@ -58,6 +87,8 @@ function TableDisplay({
                 onSubmit={({ userInput, selectedType }) => {
                   addNewField({ userInput, selectedType });
                 }}
+                dropdownPlaceholder="Choose a type"
+                dropdownOptions={dropdownOptions}
                 rows={rows}
               />
             </TableCell>

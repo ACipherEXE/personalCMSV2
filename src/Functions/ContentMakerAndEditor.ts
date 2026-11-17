@@ -35,11 +35,11 @@ export const createContent = async (
 
   // Set up the new Content
   const newModel = {
-    model_uuid: uuid,
-    model_name: modelStructureName,
+    uuid: uuid,
+    modelName: modelStructureName,
     name: contentName,
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
     fields: fieldStructureGenerator(model?.fields ?? []) ?? {},
   };
   try {

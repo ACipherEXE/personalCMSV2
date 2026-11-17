@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
+// import {
+//   getSpecificContentEntry,
+//   getSpecificContentModel,
+// } from "../../../API/superBaseAPICalls";
 import {
   getSpecificContentEntry,
   getSpecificContentModel,
-} from "../../../API/superBaseAPICalls";
+} from "../../../API/MiddlewareAPICalls";
 import type {
   contentInterface,
   modelInterface,
@@ -36,10 +40,12 @@ function Content() {
     const fetchSpecificContent = async () => {
       if (!entryId) return;
       const entry = (await getSpecificContentEntry(entryId)) || null;
-      if (!entry?.model_uuid) return;
-      const model = (await getSpecificContentModel(entry?.model_uuid)) || null;
-      setModelStructure(model || null);
-      setEntryStructure(entry || null);
+      if (!entry?.modelUuid) return;
+      const model = (await getSpecificContentModel(entry.modelUuid)) || null;
+      console.log("model", model);
+      console.log("entry", entry);
+      setModelStructure(model ?? null);
+      setEntryStructure(entry ?? null);
       setIsLoading(false);
     };
     fetchSpecificContent();

@@ -5,10 +5,12 @@ import { modelPath } from "../../../paths/model-paths";
 import { useEffect, useState } from "react";
 import type { modelInterface } from "../../../interfaces/ModelInterface";
 import TableDisplay from "../../custom/TableDisplay";
-import { getSpecificContentModel } from "../../../API/superBaseAPICalls";
 import JSONDisplay from "../../custom/JSONDisplay";
-import { camelCaseGenerator } from "../../../Functions/StringFixes";
-import { updateModelFields } from "../../../Functions/ModelMakerAndEditor";
+import {
+  addFieldToContentModel,
+  getSpecificContentModel,
+  removeFieldFromContentModel,
+} from "../../../API/MiddlewareAPICalls";
 
 /**
  * This is used to edit, read and add functions to models. Think of this area as a blueprint editor.
@@ -53,7 +55,7 @@ function Model() {
           ← Back
         </Button>
         <h1 className="text-white text-xl font-semibold">
-          {modelStructure?.entry_name ?? "Loading..."}
+          {modelStructure?.entryName ?? "Loading..."}
         </h1>
       </div>
 
@@ -74,23 +76,27 @@ function Model() {
               {selectedSidebarItem === sidebarItems[0] &&
                 modelStructure?.fields && (
                   <TableDisplay
-                    headers={["Name", "Type"]}
+                    headers={["Name", "Type", "Action"]}
                     rows={modelStructure.fields}
-                    rowKeys={["name", "type"]}
-                    addNewField={({ userInput, selectedType }) => {
-                      // Handle adding a new field here
-                      modelStructure.fields.push({
-                        name: userInput,
-                        type: selectedType || "string",
-                        id: camelCaseGenerator(userInput),
-                        localized: false,
-                        required: false,
-                        disabled: false,
-                        omitted: false,
-                      });
-                      // Update the state and save the model structure
-                      setModelStructure({ ...modelStructure });
-                      updateModelFields(modelStructure);
+                    rowKeys={["name", "type", "action"]}
+                    dropdownOptions={["String", "Symbol", "Number", "Text"]}
+                    addNewField={async ({ userInput, selectedType }) => {
+                      if (modelId) {
+                        setModelStructure(
+                          await addFieldToContentModel(
+                            modelId,
+                            userInput,
+                            selectedType || "string",
+                          ),
+                        );
+                      }
+                    }}
+                    removeField={async (fieldName) => {
+                      if (modelId) {
+                        setModelStructure(
+                          await removeFieldFromContentModel(modelId, fieldName),
+                        );
+                      }
                     }}
                   />
                 )}
