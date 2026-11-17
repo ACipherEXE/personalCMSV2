@@ -1,4 +1,3 @@
-import { Field } from "../components/ui/field";
 import type {
   contentInterface,
   modelInterface,
@@ -100,11 +99,27 @@ export const removeFieldFromContentModel = async (
 };
 
 /**
- * A API call that gets all the content models from the database.
+ * A API call that gets all the content entries from the database.
  * @returns An array of content models.
  */
 export const getContentEntries = async (): Promise<contentInterface[]> => {
   return fetch(`${MIDDLE_API}/entries`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      return result;
+    });
+};
+
+/**
+ * A API call that gets a specific content entryfrom the database.
+ * @returns An array of content models.
+ */
+export const getSpecificContentEntry = async (
+  modelUuid: string,
+): Promise<contentInterface | null> => {
+  return fetch(`${MIDDLE_API}/entry/${modelUuid}`, {
     method: "GET",
   })
     .then((response) => response.json())
